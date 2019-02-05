@@ -1,0 +1,20 @@
+<form class="form" [formGroup]="itemForm">
+  <label class="form__item">
+    Title
+    <input type="text" formControlName="title" required>
+  </label>
+  <label class="form__item">
+    Description
+    <input type="text" name="description">
+  </label>
+  <label class="form__item">
+    Date
+    <input type="date" formControlName="date" required>
+  </label>
+  <label class="form__item">
+    Image
+    <input type="text" name="photo">
+  </label>
+
+  <button class="btn" (click)="onSubmit()" [disabled]="!itemForm.valid">Add</button>
+</form>

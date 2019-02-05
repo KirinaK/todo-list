@@ -1,0 +1,14 @@
+<button class="btn" (click)="openForm()">new</button>
+
+<div *ngIf="!hide">
+  <app-new-item></app-new-item>
+</div>
+
+<ul class="todo_list">
+  <li class="list__item">
+    <h1 class="item__title"></h1>
+    <p class="item__description"></p>
+    <img class="item__image" src="">
+    <p class="item__date"></p>
+  </li>
+</ul>

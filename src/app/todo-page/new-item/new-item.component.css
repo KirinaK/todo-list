@@ -1,0 +1,18 @@
+.form {
+  width: min-content;
+}
+
+.form__item {
+  width: auto;
+}
+
+.form__item input {
+  margin: 5px 0 20px 0;
+  border: 1px solid #D6D6D6;
+  border-radius: 7%;
+  padding: 5px;
+}
+
+.form__item input:active, :focus {
+  outline-color: #007ffa
+}

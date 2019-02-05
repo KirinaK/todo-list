@@ -1,0 +1,38 @@
+header {
+  height: 50px;
+  position: fixed;
+  width: 100%;
+  margin: 0;
+  padding: 10px;
+}
+
+.header__link {
+  text-decoration: none;
+  width: auto;
+  margin: 10px;
+  padding: 5px;
+  border: 1px solid #D6D6D6;
+  border-radius: 10%;
+}
+
+.header__link:focus {
+  outline: none;
+}
+
+.header__link:visited {
+  color: #000;
+}
+
+.header__link:hover {
+  background-color: #D6D6D6;
+}
+
+.info {
+  padding: 50px 20px;
+}
+
+.info__image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
