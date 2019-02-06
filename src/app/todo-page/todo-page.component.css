@@ -1,0 +1,30 @@
+.todo_list {
+  list-style-type: none;
+  width: min-content;
+  height: min-content;
+  display: flex;
+  flex-direction: row;
+}
+
+.list__item {
+  max-width: 210px;
+  border: 1px solid #D6D6D6;
+  border-radius: 2%;
+  padding: 7px;
+  margin: 7px;
+}
+
+.item__delete, .item__edit {
+  float: right;
+  cursor: pointer;
+}
+
+.item__description {
+  word-wrap: break-word;
+}
+
+.item__image {
+  width: 200px;
+  height: 100px;
+  margin-bottom: 15px;
+}

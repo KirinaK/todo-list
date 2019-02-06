@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { TodoItemService } from '../../services/todo-item.service';
 
 @Component({
   selector: 'app-new-item',
@@ -8,17 +9,21 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class NewItemComponent implements OnInit {
   public itemForm = new FormGroup({
+    id: new FormControl(''),
     title: new FormControl(''),
-    date: new FormControl('')
+    description: new FormControl(''),
+    date: new FormControl(''),
+    img: new FormControl('')
   });
 
-  constructor() { }
+  constructor(private todoService: TodoItemService) { }
 
   ngOnInit() {
   }
 
-  onSubmit() {
-    console.warn(this.itemForm.value);
+  addItem() {
+    this.todoService.createTodoItem(this.itemForm.value).subscribe();
+    this.itemForm.reset();
   }
 
 }
