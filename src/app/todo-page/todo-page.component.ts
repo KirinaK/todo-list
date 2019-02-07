@@ -1,42 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { NewItemComponent } from './new-item/new-item.component';
 import { TodoItemService } from '../services/todo-item.service';
+import { Todo } from '../shared/todo';
 
 @Component({
   selector: 'app-todo-page',
   templateUrl: './todo-page.component.html',
-  styleUrls: ['./todo-page.component.css']
+  styleUrls: ['./todo-page.component.css'],
+  providers: [TodoItemService]
 })
 export class TodoPageComponent implements OnInit {
-  public itemsData: Array<Object> = [];
-  private todoItems: Array<Object> = JSON.parse(localStorage.getItem('todo-items'))
-
+  public itemsData: Todo[] = [];
+  public currentItem;
 
   constructor(private todoService: TodoItemService) { }
 
   ngOnInit() {
-    this.showItemsFromService();
+    this.showTodos();
   }
 
-  getItem(event) {
-    this.itemsData.push(event)
-    localStorage.setItem('todo-items', JSON.stringify(this.itemsData));
+  showTodos() {
+    this.todoService.getAllTodoItems().subscribe(data => this.itemsData = data);
   }
 
-  deleteItem(data) {
-    this.itemsData = this.itemsData.filter(item => item !== data);
-    this.todoItems = this.todoItems.filter(item => item !== data);
-    localStorage.setItem('todo-items', JSON.stringify(this.todoItems));
+  createItem(item: Todo) {
+    this.todoService.createTodoItem(item).subscribe(newItem => this.itemsData = this.itemsData.concat(newItem));
   }
 
-  editItem(data) {
-    console.log(data);
-  }
-
-  showItemsFromService() {
-    this.todoService.getTodoItems().subscribe(data => {
-      data.forEach(item => this.itemsData.push(item));
+  deleteItem(item: Todo) {
+    this.todoService.deleteTodoItem(item.id).subscribe(() => {
+      this.itemsData = this.itemsData.filter(todo => todo.id !== item.id);
     });
   }
 
+  updateItem(item) {
+    this.getTodoById(item);
+    // this.todoService.updateTodoItem(item).subscribe(changedItem => this.currentItem = changedItem);
+  }
+
+  getTodoById(item) {
+    this.currentItem = this.itemsData.filter(todo => todo.id === item.id)[0];
+  }
 }

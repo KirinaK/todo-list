@@ -1,9 +1,9 @@
 .todo_list {
   list-style-type: none;
-  width: min-content;
-  height: min-content;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .list__item {

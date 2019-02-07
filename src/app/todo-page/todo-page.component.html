@@ -1,13 +1,13 @@
-<app-new-item (saveData)="getItem($event)"></app-new-item>
+<app-new-item (addNewItem)="createItem($event)" (changeItem)="updateItem($event)" #childRef></app-new-item>
 
-<ul class="todo_list">
+<ul class="todo_list" *ngIf="itemsData.length > 0">
   <li class="list__item" *ngFor="let item of itemsData">
     <span class="item__delete" (click)="deleteItem(item)">x</span>
     <h2 class="item__title">{{item.title}}</h2>
     <p class="item__description">{{item.description}}</p>
     <img class="item__image" src="{{item.img}}">
     <span class="item__date">{{item.date}}</span>
-    <span class="item__edit" (click)="editItem(item)">edit</span>
+    <span class="item__edit" (click)="childRef.editItem(item)">edit</span>
   </li>
 </ul>
 

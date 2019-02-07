@@ -9,6 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { TodoPageComponent } from './todo-page/todo-page.component';
 import { NewItemComponent } from './todo-page/new-item/new-item.component';
 
+import { TodoItemService } from './services/todo-item.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,7 @@ import { NewItemComponent } from './todo-page/new-item/new-item.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [TodoItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

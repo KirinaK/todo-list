@@ -16,5 +16,6 @@
     <input type="text" formControlName="img">
   </label>
 
-  <button class="btn" (click)="addItem()" [disabled]="!itemForm.valid">Add</button>
+  <button class="btn" (click)="addItem()" [disabled]="!itemForm.valid" *ngIf="!changeButton">Add</button>
+  <button class="btn" (click)="updateItem()" [disabled]="!itemForm.valid" *ngIf="changeButton">Save</button>
 </form>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { TodoItemService } from '../../services/todo-item.service';
+import { Todo } from '../../shared/todo';
 
 @Component({
   selector: 'app-new-item',
@@ -8,6 +9,7 @@ import { TodoItemService } from '../../services/todo-item.service';
   styleUrls: ['./new-item.component.css']
 })
 export class NewItemComponent implements OnInit {
+  public changeButton: boolean = false;
   public itemForm = new FormGroup({
     id: new FormControl(''),
     title: new FormControl(''),
@@ -16,14 +18,28 @@ export class NewItemComponent implements OnInit {
     img: new FormControl('')
   });
 
+  @Input() itemOnChange;
+  @Output() addNewItem = new EventEmitter<Todo[]>();
+  @Output() changeItem = new EventEmitter<Todo[]>(); 
+
   constructor(private todoService: TodoItemService) { }
 
   ngOnInit() {
   }
 
   addItem() {
-    this.todoService.createTodoItem(this.itemForm.value).subscribe();
+    this.addNewItem.emit(this.itemForm.value);
     this.itemForm.reset();
   }
 
+  editItem(data) {
+    this.itemForm.setValue(data);
+    this.changeButton = true;
+  }
+
+  updateItem() {
+    this.changeButton = false;
+    this.changeItem.emit(this.itemForm.value);
+    this.itemForm.reset();
+  }
 }
