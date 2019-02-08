@@ -1,0 +1,1 @@
+export const Regexp = "(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)";

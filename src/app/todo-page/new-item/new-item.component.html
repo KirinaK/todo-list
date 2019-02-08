@@ -13,9 +13,10 @@
   </label>
   <label class="form__item">
     Image
-    <input type="text" formControlName="img">
+    <input type="text" formControlName="img" [pattern]="Regexp" required>
   </label>
 
   <button class="btn" (click)="addItem()" [disabled]="!itemForm.valid" *ngIf="!changeButton">Add</button>
   <button class="btn" (click)="updateItem()" [disabled]="!itemForm.valid" *ngIf="changeButton">Save</button>
+  <button class="btn btn__right" (click)="sorting()">Sort by Date</button>
 </form>

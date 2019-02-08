@@ -1,7 +1,9 @@
 .form {
   width: min-content;
   padding: 10px 30px;
+  margin-top: 60px;
   border-right: 1px solid #D6D6D6;
+  float: left;
 }
 
 .form__item {
@@ -18,4 +20,8 @@
 
 .form__item input:active, :focus {
   outline-color: #007ffa
+}
+
+.btn__right {
+  float: right;
 }

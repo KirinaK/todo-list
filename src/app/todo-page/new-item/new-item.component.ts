@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TodoItemService } from '../../services/todo-item.service';
 import { Todo } from '../../shared/todo';
+import { Regexp } from '../../constants/image-regexp.constants';
 
 @Component({
   selector: 'app-new-item',
@@ -20,7 +21,8 @@ export class NewItemComponent implements OnInit {
 
   @Input() itemOnChange;
   @Output() addNewItem = new EventEmitter<Todo[]>();
-  @Output() changeItem = new EventEmitter<Todo[]>(); 
+  @Output() changeItem = new EventEmitter<Todo[]>();
+  @Output() sortItem = new EventEmitter<Todo[]>();
 
   constructor(private todoService: TodoItemService) { }
 
@@ -41,5 +43,9 @@ export class NewItemComponent implements OnInit {
     this.changeButton = false;
     this.changeItem.emit(this.itemForm.value);
     this.itemForm.reset();
+  }
+
+  sorting() {
+    this.sortItem.emit();
   }
 }

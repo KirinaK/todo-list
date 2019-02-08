@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AboutConstant } from '../constants/about.constants';
+import { HeaderComponent } from '../templates/header/header.component';
 
 @Component({
   selector: 'app-home',

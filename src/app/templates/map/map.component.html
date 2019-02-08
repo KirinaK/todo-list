@@ -1,0 +1,9 @@
+<div class="map">
+  <agm-map [latitude]="lat" [longitude]="lng">
+    <agm-marker [latitude]="lat" [longitude]="lng">
+      <agm-info-window [disableAutoPan]="true">
+          {{place.country}}, {{place.city}}, {{place.street}}, {{place.buildNumber}}
+        </agm-info-window>
+    </agm-marker>
+  </agm-map>
+</div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewItemComponent } from './new-item/new-item.component';
+import { HeaderComponent } from '../templates/header/header.component';
+import { MapComponent } from '../templates/map/map.component';
 import { TodoItemService } from '../services/todo-item.service';
 import { Todo } from '../shared/todo';
 
@@ -11,7 +13,6 @@ import { Todo } from '../shared/todo';
 })
 export class TodoPageComponent implements OnInit {
   public itemsData: Todo[] = [];
-  public currentItem;
 
   constructor(private todoService: TodoItemService) { }
 
@@ -34,11 +35,13 @@ export class TodoPageComponent implements OnInit {
   }
 
   updateItem(item) {
-    this.getTodoById(item);
-    // this.todoService.updateTodoItem(item).subscribe(changedItem => this.currentItem = changedItem);
+    let currentItem = this.itemsData.find(todo => todo.id === item.id);
+    return this.todoService.updateTodoItem(item).subscribe(changedItem => Object.assign(currentItem, changedItem));
   }
 
-  getTodoById(item) {
-    this.currentItem = this.itemsData.filter(todo => todo.id === item.id)[0];
+  sortingItems(event) {
+    this.itemsData.sort((a,b) => {
+      return a.date.localeCompare(b.date)
+    });
   }
 }

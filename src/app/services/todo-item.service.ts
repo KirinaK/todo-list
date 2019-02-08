@@ -7,7 +7,7 @@ import { Todo } from '../shared/todo';
   providedIn: 'root'
 })
 export class TodoItemService {
-  private apiURL = environment.apiUrl; 
+  private apiURL = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
