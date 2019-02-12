@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TodoItemService } from '../../services/todo-item.service';
 import { Todo } from '../../shared/todo';
 import { Regexp } from '../../constants/image-regexp.constants';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-new-item',
@@ -16,8 +17,9 @@ export class NewItemComponent implements OnInit {
     title: new FormControl(''),
     description: new FormControl(''),
     date: new FormControl(''),
-    img: new FormControl('')
+    img: new FormControl(''),
   });
+  public image;
 
   @Input() itemOnChange;
   @Output() addNewItem = new EventEmitter<Todo[]>();

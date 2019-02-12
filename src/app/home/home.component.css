@@ -3,7 +3,20 @@
 }
 
 .info__image {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+.info__about {
+  width: 50%;
+  margin: 0 auto;
+  text-align: justify;
+}
+
+.info__main {
+  margin: auto;
+  text-align: center;
 }

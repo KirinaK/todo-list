@@ -6,6 +6,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  align-content: flex-start;
   position: fixed;
   left: 265px;
   overflow: auto;
@@ -14,24 +15,75 @@
 
 .list__item {
   width: 210px;
-  min-height: 280px;
+  height: 250px;
+  max-height: 330px;
   border: 1px solid #D6D6D6;
   border-radius: 2%;
   padding: 7px;
   margin: 7px;
+  position: relative;
+  cursor: pointer;
+}
+
+.list__item:hover {
+  transform: scale(1.02);
+  background: linear-gradient(to bottom, #EAE5F0, #E5FDFF);
 }
 
 .item__delete, .item__edit {
   float: right;
-  cursor: pointer;
+}
+
+.item__delete{
+  font-weight: bold;
+  padding: 5px;
+}
+
+.item__delete:hover, .item__edit:hover {
+  transform: scale(1.25);
 }
 
 .item__description {
-  word-wrap: break-word;
+  height: 19px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.showAllText {
+  height: 80px;
+  white-space: inherit;
+  overflow-y: auto;
 }
 
 .item__image {
   width: 200px;
   height: 100px;
+  display: block;
+  margin: auto;
   margin-bottom: 15px;
+}
+
+.item__footer {
+  width: 90%;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  position: absolute;
+}
+
+@media (max-width: 533px) {
+  .todo_list {
+    flex-direction: column;
+    flex-wrap: inherit;
+    position: relative;
+    padding: 20px 10px 180px;
+    float: left;
+    margin-left: calc(100vw/6.3);
+    left: 0;
+    min-height: fit-content;
+  }
+
 }

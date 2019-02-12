@@ -14,6 +14,8 @@ import { MapComponent } from './templates/map/map.component';
 
 import { TodoItemService } from './services/todo-item.service';
 
+import { ApiKey } from './constants/api-key.constants';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,7 @@ import { TodoItemService } from './services/todo-item.service';
     ReactiveFormsModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC1l8s9mTtMY3gyvG5xSyFIf64U4Lbpqm4'
+      apiKey: ApiKey
     })
   ],
   providers: [TodoItemService],

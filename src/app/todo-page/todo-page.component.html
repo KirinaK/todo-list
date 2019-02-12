@@ -5,13 +5,15 @@
               (sortItem)="sortingItems($event)" #childRef></app-new-item>
 
 <ul class="todo_list" *ngIf="itemsData.length > 0">
-  <li class="list__item" *ngFor="let item of itemsData">
+  <li class="list__item" *ngFor="let item of itemsData; let i = index">
     <span class="item__delete" (click)="deleteItem(item)">x</span>
     <h2 class="item__title">{{item.title}}</h2>
-    <p class="item__description">{{item.description}}</p>
-    <img class="item__image" src="{{item.img}}">
-    <span class="item__date">{{item.date}}</span>
-    <span class="item__edit" (click)="childRef.editItem(item)">edit</span>
+    <p class="item__description" [ngClass]="{'showAllText': item.show}" (click)="showText(item, $event)">{{item.description}}</p>
+    <div class="item__footer">
+      <img class="item__image" src="{{item.img}}">
+      <span class="item__date">{{item.date}}</span>
+      <span class="item__edit" (click)="childRef.editItem(item)">edit</span>
+    </div>
   </li>
 </ul>
 

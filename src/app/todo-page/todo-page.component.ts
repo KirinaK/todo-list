@@ -44,4 +44,10 @@ export class TodoPageComponent implements OnInit {
       return a.date.localeCompare(b.date)
     });
   }
+
+  showText(item, event) {
+    let length = item.description.length;
+    (length >= 27) ? item.show = !item.show : item.show;
+    (item.show === true) ? event.target.parentElement.style.height = "inherit" : event.target.parentElement.style.height = "250px";
+  }
 }

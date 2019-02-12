@@ -14,7 +14,8 @@ export class MapComponent implements OnInit {
     country: '',
     city: '',
     street: '',
-    buildNumber: null
+    buildNumber: null,
+    formatted_address: ''
   };
   public lat: number;
   public lng: number;
@@ -27,16 +28,12 @@ export class MapComponent implements OnInit {
   ngOnInit() {
   }
 
-  // ngAfterContentInit() {
-  //   this.getAddress();
-  // }
-
   getCurrentPosition() {
     if (navigator) {
       navigator.geolocation.getCurrentPosition(position => {
         this.lat = +position.coords.latitude;
         this.lng = +position.coords.longitude;
-        this.getAddress();
+        setTimeout(() => {this.getAddress()}, 1000);
       });
     }
   }
@@ -48,18 +45,22 @@ export class MapComponent implements OnInit {
       this.geocoder.geocode({'location': LatLang}, (results, status) => {
         if (status === google.maps.GeocoderStatus.OK) {
           let result = results[0];
-          let rsltAdrComponent = result.address_components;
-          let resultLength = rsltAdrComponent.length;
-          if (result != null) {
-            this.place.country = rsltAdrComponent.find(x => x.types[0] == 'country').long_name;
-            this.place.city = rsltAdrComponent.find(x => x.types[0] == 'locality').long_name;
-            this.place.street = rsltAdrComponent.find(x => x.types == 'route').long_name;
-            this.place.buildNumber = rsltAdrComponent.find(x => x.types == 'street_number').long_name;
-          } else {
-            alert("No address available!");
-          }
+          let result_address = result.address_components;
+          let formatted_address = result.formatted_address;
+          (formatted_address !== null) ? this.place.formatted_address = formatted_address : this.getPartsofAddress(result, result_address);
         }
       })
     });
+  }
+
+  getPartsofAddress(result, result_address) {
+    if (result !== null) {
+      this.place.country = result_address.find(x => x.types[0] == 'country').long_name;
+      this.place.city = result_address.find(x => x.types[0] == 'locality').long_name;
+      this.place.street = result_address.find(x => x.types == 'route').long_name;
+      this.place.buildNumber = result_address.find(x => x.types == 'street_number').long_name;
+    } else {
+      alert("No address available!");
+    }
   }
 }

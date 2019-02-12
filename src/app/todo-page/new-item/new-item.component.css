@@ -25,3 +25,13 @@
 .btn__right {
   float: right;
 }
+
+@media (max-width: 533px) {
+  .form {
+    margin-left: calc(100vw/9);
+  }
+
+  .form__item input {
+    margin-bottom: 10px;
+  }
+}
