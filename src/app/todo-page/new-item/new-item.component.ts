@@ -11,15 +11,14 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./new-item.component.css']
 })
 export class NewItemComponent implements OnInit {
-  public changeButton: boolean = false;
+  public changeButton = false;
   public itemForm = new FormGroup({
     id: new FormControl(''),
     title: new FormControl(''),
     description: new FormControl(''),
     date: new FormControl(''),
-    img: new FormControl(''),
+    img: new FormControl('', Validators.pattern(Regexp)),
   });
-  public image;
 
   @Input() itemOnChange;
   @Output() addNewItem = new EventEmitter<Todo[]>();
@@ -31,23 +30,23 @@ export class NewItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  addItem() {
+  public addItem(): void {
     this.addNewItem.emit(this.itemForm.value);
     this.itemForm.reset();
   }
 
-  editItem(data) {
+  private editItem(data: Todo): void {
     this.itemForm.setValue(data);
     this.changeButton = true;
   }
 
-  updateItem() {
+  public updateItem(): void {
     this.changeButton = false;
     this.changeItem.emit(this.itemForm.value);
     this.itemForm.reset();
   }
 
-  sorting() {
+  public sorting(): void {
     this.sortItem.emit();
   }
 }

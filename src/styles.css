@@ -6,16 +6,3 @@ body {
   margin: 0;
   padding: 0;
 }
-
-.btn {
-  width: auto;
-  border-radius: 10%;
-  font-family: 'Montserrat';
-  font-size: 16px;
-  border: 1px solid #D6D6D6;
-  background-color: #D6D6D6;
-}
-
-.btn:focus {
-  outline: none;
-}

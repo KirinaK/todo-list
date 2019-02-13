@@ -17,7 +17,7 @@ export class TodoItemService {
 
   createTodoItem(item: Todo) {
     return this.http.post<Todo[]>(this.apiURL + '/todo-items', item);
-  }  
+  }
 
   updateTodoItem(item: Todo) {
     return this.http.put<Todo[]>(this.apiURL + '/todo-items/' + item.id, item);

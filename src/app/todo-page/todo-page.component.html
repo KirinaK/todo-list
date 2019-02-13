@@ -1,22 +1,22 @@
 <app-header></app-header>
 
-<app-new-item (addNewItem)="createItem($event)"
-              (changeItem)="updateItem($event)"
-              (sortItem)="sortingItems($event)" #childRef></app-new-item>
+<main>
+  <app-new-item (addNewItem)="createItem($event)"
+                (changeItem)="updateItem($event)"
+                (sortItem)="sortingItems()" #childRef></app-new-item>
 
-<ul class="todo_list" *ngIf="itemsData.length > 0">
-  <li class="list__item" *ngFor="let item of itemsData; let i = index">
-    <span class="item__delete" (click)="deleteItem(item)">x</span>
-    <h2 class="item__title">{{item.title}}</h2>
-    <p class="item__description" [ngClass]="{'showAllText': item.show}" (click)="showText(item, $event)">{{item.description}}</p>
-    <div class="item__footer">
-      <img class="item__image" src="{{item.img}}">
-      <span class="item__date">{{item.date}}</span>
-      <span class="item__edit" (click)="childRef.editItem(item)">edit</span>
-    </div>
-  </li>
-</ul>
+  <ul class="todo-list" *ngIf="itemsData.length > 0">
+    <li class="todo-list__item" *ngFor="let item of itemsData">
+      <span class="todo-list__item-delete" (click)="deleteItem(item)">x</span>
+      <h2 class="todo-list__item-title">{{item.title}}</h2>
+      <p class="todo-list__item-description" [ngClass]="{'showAllText': item.show}" (click)="showText(item, $event)">{{item.description}}</p>
+      <div class="todo-list__item-footer">
+        <img class="todo-list__item-image" src="{{item.img}}" (error)="setDefaultImage(item)">
+        <span class="todo-list__item-date">{{item.date}}</span>
+        <span class="todo-list__item-edit" (click)="childRef.editItem(item)">edit</span>
+      </div>
+    </li>
+  </ul>
+</main>
 
 <app-map></app-map>
-
-<!-- https://images.unsplash.com/photo-1435783099294-283725c37230?ixlib=rb-0.3.5&q=99&fm=jpg&crop=entropy&cs=tinysrgb&w=2048&fit=max&s=4794ac75c92bc641bdd8d1781cf2e49d -->

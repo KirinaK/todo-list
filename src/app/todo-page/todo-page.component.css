@@ -1,4 +1,4 @@
-.todo_list {
+.todo-list {
   padding-top: 60px;
   margin-top: 0;
   list-style-type: none;
@@ -13,7 +13,7 @@
   height: calc(100vh - 230px);
 }
 
-.list__item {
+.todo-list__item {
   width: 210px;
   height: 250px;
   max-height: 330px;
@@ -25,47 +25,48 @@
   cursor: pointer;
 }
 
-.list__item:hover {
+.todo-list__item:hover {
   transform: scale(1.02);
   background: linear-gradient(to bottom, #EAE5F0, #E5FDFF);
 }
 
-.item__delete, .item__edit {
+.todo-list__item-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.todo-list__item-delete, .todo-list__item-edit {
   float: right;
 }
 
-.item__delete{
+.todo-list__item-delete{
   font-weight: bold;
   padding: 5px;
 }
 
-.item__delete:hover, .item__edit:hover {
+.todo-list__item-delete:hover, .todo-list__item-edit:hover {
   transform: scale(1.25);
 }
 
-.item__description {
-  height: 19px;
-  margin: 0;
+.todo-list__item-description {
+  height: 38px;
+  margin: 0 5px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  word-wrap: normal;
 }
 
 .showAllText {
   height: 80px;
   white-space: inherit;
+  word-wrap: break-word;
   overflow-y: auto;
+  -webkit-transition: height .25s;
+  transition: height .25s;
 }
 
-.item__image {
-  width: 200px;
-  height: 100px;
-  display: block;
-  margin: auto;
-  margin-bottom: 15px;
-}
-
-.item__footer {
+.todo-list__item-footer {
   width: 90%;
   bottom: 10px;
   left: 0;
@@ -74,16 +75,39 @@
   position: absolute;
 }
 
+.todo-list__item-image {
+  width: 200px;
+  height: 100px;
+  display: block;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
 @media (max-width: 533px) {
-  .todo_list {
+  .todo-list {
     flex-direction: column;
     flex-wrap: inherit;
     position: relative;
     padding: 20px 10px 180px;
     float: left;
-    margin-left: calc(100vw/6.3);
-    left: 0;
+    left: calc(100vw/7.1);
     min-height: fit-content;
   }
-
 }
+
+@media (min-width: 534px) and (max-width: 784px) {
+  .todo-list {
+    flex-direction: column;
+    flex-wrap: inherit;
+    position: relative;
+    min-height: fit-content;
+    left: calc(100vw/8.3);
+    margin-bottom: 200px;
+  }
+}
+
+@media (min-width: 785px) and (max-width: 1024px) {
+  .todo-list {
+    left: calc(100vw/3);
+  }
+} 

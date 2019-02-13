@@ -4,7 +4,6 @@ export class Todo {
   public description: string;
   public img: string;
   public date: string;
-  
   constructor(values: Object = {}) {
     Object.assign(this, values);
   }
