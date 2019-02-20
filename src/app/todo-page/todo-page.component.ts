@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NewItemComponent } from './new-item/new-item.component';
 import { HeaderComponent } from '../templates/header/header.component';
 import { MapComponent } from '../templates/map/map.component';
 import { TodoItemService } from '../services/todo-item.service';
+import { ConnectionService } from '../services/connection.service';
 import { DefaultImage } from '../constants/default-image.constants';
 import { Todo } from '../shared/todo';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-todo-page',
@@ -14,15 +16,16 @@ import { Todo } from '../shared/todo';
 })
 export class TodoPageComponent implements OnInit {
   public itemsData: Todo[] = [];
+  private subscription: Subscription;
 
-  constructor(private todoService: TodoItemService) { }
+  constructor(private todoService: TodoItemService, private connectionService: ConnectionService) { }
 
   ngOnInit() {
     this.showTodos();
   }
 
   private showTodos(): void {
-    this.todoService.getAllTodoItems().subscribe(data => this.itemsData = data);
+    this.subscription = this.todoService.getAllTodoItems().subscribe(data => this.itemsData = data);
   }
 
   public createItem(item: Todo): void {
@@ -38,6 +41,10 @@ export class TodoPageComponent implements OnInit {
   public updateItem(item: Todo): void {
     const currentItem = this.itemsData.find(todo => todo.id === item.id);
     this.todoService.updateTodoItem(item).subscribe(changedItem => Object.assign(currentItem, changedItem));
+  }
+
+  public editItem(value) {
+    this.connectionService.sendItem(value);
   }
 
   public sortingItems(): void {
@@ -56,5 +63,9 @@ export class TodoPageComponent implements OnInit {
 
   public setDefaultImage(item: Todo): void {
     item.img = DefaultImage;
+  }
+
+  ngOnDestroy() {
+    this.subscription && this.subscription.unsubscribe();
   }
 }

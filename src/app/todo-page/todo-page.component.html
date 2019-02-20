@@ -3,7 +3,7 @@
 <main>
   <app-new-item (addNewItem)="createItem($event)"
                 (changeItem)="updateItem($event)"
-                (sortItem)="sortingItems()" #childRef></app-new-item>
+                (sortItem)="sortingItems()"></app-new-item>
 
   <ul class="todo-list" *ngIf="itemsData.length > 0">
     <li class="todo-list__item" *ngFor="let item of itemsData">
@@ -13,7 +13,7 @@
       <div class="todo-list__item-footer">
         <img class="todo-list__item-image" src="{{item.img}}" (error)="setDefaultImage(item)">
         <span class="todo-list__item-date">{{item.date}}</span>
-        <span class="todo-list__item-edit" (click)="childRef.editItem(item)">edit</span>
+        <span class="todo-list__item-edit" (click)="editItem(item)">edit</span>
       </div>
     </li>
   </ul>

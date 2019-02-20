@@ -1,9 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TodoItemService } from '../../services/todo-item.service';
+import { ConnectionService } from '../../services/connection.service';
 import { Todo } from '../../shared/todo';
 import { Regexp } from '../../constants/image-regexp.constants';
 import { environment } from '../../../environments/environment';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-new-item',
@@ -16,16 +18,18 @@ export class NewItemComponent implements OnInit {
     id: new FormControl(''),
     title: new FormControl(''),
     description: new FormControl(''),
-    date: new FormControl(''),
     img: new FormControl('', Validators.pattern(Regexp)),
+    date: new FormControl(''),
   });
+  private subscription: Subscription;
 
-  @Input() itemOnChange;
   @Output() addNewItem = new EventEmitter<Todo[]>();
   @Output() changeItem = new EventEmitter<Todo[]>();
   @Output() sortItem = new EventEmitter<Todo[]>();
 
-  constructor(private todoService: TodoItemService) { }
+  constructor(private todoService: TodoItemService, private connectionService: ConnectionService) {
+    this.subscription = this.connectionService.todoData$.subscribe(item => this.editItem(item));
+  }
 
   ngOnInit() {
   }
@@ -35,8 +39,12 @@ export class NewItemComponent implements OnInit {
     this.itemForm.reset();
   }
 
-  private editItem(data: Todo): void {
-    this.itemForm.setValue(data);
+  public editItem(item): void {
+    this.itemForm.controls['id'].setValue(item.id);
+    this.itemForm.controls['title'].setValue(item.title);
+    this.itemForm.controls['description'].setValue(item.description);
+    this.itemForm.controls['img'].setValue(item.img);
+    this.itemForm.controls['date'].setValue(item.date);
     this.changeButton = true;
   }
 
@@ -48,5 +56,9 @@ export class NewItemComponent implements OnInit {
 
   public sorting(): void {
     this.sortItem.emit();
+  }
+
+  ngOnDestroy() {
+    this.subscription && this.subscription.unsubscribe();
   }
 }
