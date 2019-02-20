@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { pipe } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Todo } from '../shared/todo';
 
@@ -8,6 +11,8 @@ import { Todo } from '../shared/todo';
 })
 export class TodoItemService {
   private apiURL = environment.apiUrl;
+  private todoItems: BehaviorSubject<Todo[]> = new BehaviorSubject([]);
+  public todoData$ = this.todoItems.asObservable();
 
   constructor(private http: HttpClient) { }
 
