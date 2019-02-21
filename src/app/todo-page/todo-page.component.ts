@@ -56,8 +56,8 @@ export class TodoPageComponent implements OnInit {
   public showText(item: any, event: any): void {
     const lengthOfString = item.description.length;
     (lengthOfString >= 54) ? item.show = !item.show : item.show;
-    event.target.style.whiteSpace = (lengthOfString >= 27) ? 'pre-wrap' : 'nowrap';
-    event.target.style.wordBreak = (lengthOfString >= 27) ? 'break-all' : 'normal';
+    event.target.style.whiteSpace = (lengthOfString >= 20) ? 'pre-wrap' : 'nowrap';
+    event.target.style.wordBreak = (lengthOfString >= 20) ? 'break-all' : 'normal';
     event.target.parentElement.style.minHeight = (item.show === true) ? '300px' : '250px';
   }
 

@@ -28,7 +28,7 @@ export class NewItemComponent implements OnInit {
   @Output() sortItem = new EventEmitter<Todo[]>();
 
   constructor(private todoService: TodoItemService, private connectionService: ConnectionService) {
-    this.subscription = this.connectionService.todoData$.subscribe(item => this.editItem(item));
+    this.checkData();
   }
 
   ngOnInit() {
@@ -56,6 +56,14 @@ export class NewItemComponent implements OnInit {
 
   public sorting(): void {
     this.sortItem.emit();
+  }
+
+  private checkData(): void {
+    this.subscription = this.connectionService.todoData$.subscribe(item => {
+      if (Object.keys(item).length !== 0) {
+        this.editItem(item);
+      };
+    });
   }
 
   ngOnDestroy() {
