@@ -83,12 +83,17 @@ export class TodoPageComponent implements OnInit {
     event.target.parentElement.style.minHeight = (item.show === true) ? '300px' : '250px';
   }
 
+  public showTitle(item: any, event: any): void {
+    const lengthOfString = item.title.length;
+    (lengthOfString >= 15) ? item.show = !item.show : item.show;
+    event.target.parentElement.style.minHeight = (item.show === true) ? '280px' : '250px';
+  }
+
   public setDefaultImage(item: Todo): void {
     item.img = DefaultImage;
   }
 
   ngOnDestroy() {
     this.subscription && this.subscription.unsubscribe();
-    console.log('I unsubscribe');
   }
 }

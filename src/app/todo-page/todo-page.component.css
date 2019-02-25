@@ -66,6 +66,12 @@
   transition: height .25s;
 }
 
+.showAllTitle {
+  height: min-content;
+  white-space: inherit;
+  word-wrap: break-word;
+}
+
 .todo-list__item-footer {
   width: 90%;
   bottom: 10px;
