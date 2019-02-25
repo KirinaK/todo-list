@@ -1,11 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { TodoItemService } from '../../services/todo-item.service';
 import { ConnectionService } from '../../services/connection.service';
 import { Todo } from '../../shared/todo';
 import { Regexp } from '../../constants/image-regexp.constants';
 import { environment } from '../../../environments/environment';
-import { Subscription } from 'rxjs';
+import { Subscription, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-new-item',
@@ -27,7 +26,7 @@ export class NewItemComponent implements OnInit {
   @Output() changeItem = new EventEmitter<Todo[]>();
   @Output() sortItem = new EventEmitter<Todo[]>();
 
-  constructor(private todoService: TodoItemService, private connectionService: ConnectionService) {
+  constructor(private connectionService: ConnectionService) {
     this.checkData();
   }
 
@@ -59,11 +58,17 @@ export class NewItemComponent implements OnInit {
   }
 
   private checkData(): void {
-    this.subscription = this.connectionService.todoData$.subscribe(item => {
-      if (Object.keys(item).length !== 0) {
-        this.editItem(item);
-      };
-    });
+    this.subscription = this.connectionService.todoData$.subscribe(
+      item => {
+        if (Object.keys(item).length !== 0) {
+          this.editItem(item);
+        };
+      },
+      error => {
+        console.error(error.message);
+        return throwError(error);
+      }
+    );
   }
 
   ngOnDestroy() {

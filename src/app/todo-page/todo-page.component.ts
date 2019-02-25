@@ -6,7 +6,7 @@ import { TodoItemService } from '../services/todo-item.service';
 import { ConnectionService } from '../services/connection.service';
 import { DefaultImage } from '../constants/default-image.constants';
 import { Todo } from '../shared/todo';
-import { Subscription } from 'rxjs';
+import { Subscription, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-todo-page',
@@ -25,22 +25,44 @@ export class TodoPageComponent implements OnInit {
   }
 
   private showTodos(): void {
-    this.subscription = this.todoService.getAllTodoItems().subscribe(data => this.itemsData = data);
+    this.subscription = this.todoService.getAllTodoItems().subscribe(
+      data => this.itemsData = data,
+      error => {
+        console.error(error.message);
+        return throwError(error);
+      }
+    );
   }
 
   public createItem(item: Todo): void {
-    this.todoService.createTodoItem(item).subscribe(newItem => this.itemsData = this.itemsData.concat(newItem));
+    this.subscription = this.todoService.createTodoItem(item).subscribe(
+      newItem => this.itemsData = this.itemsData.concat(newItem),
+      error => {
+        console.error(error.message);
+        return throwError(error);
+      }
+    );
   }
 
   public deleteItem(item: Todo): void {
-    this.todoService.deleteTodoItem(item.id).subscribe(() => {
-      this.itemsData = this.itemsData.filter(todo => todo.id !== item.id);
-    });
+    this.subscription = this.todoService.deleteTodoItem(item.id).subscribe(
+      () => { this.itemsData = this.itemsData.filter(todo => todo.id !== item.id); },
+      error => {
+        console.error(error.message);
+        return throwError(error);
+      }
+    );
   }
 
   public updateItem(item: Todo): void {
     const currentItem = this.itemsData.find(todo => todo.id === item.id);
-    this.todoService.updateTodoItem(item).subscribe(changedItem => Object.assign(currentItem, changedItem));
+    this.subscription = this.todoService.updateTodoItem(item).subscribe(
+      changedItem => Object.assign(currentItem, changedItem),
+      error => {
+        console.error(error.message);
+        return throwError(error);
+      }
+    );
   }
 
   public editItem(value) {
