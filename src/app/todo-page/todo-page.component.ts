@@ -81,12 +81,15 @@ export class TodoPageComponent implements OnInit {
     event.target.style.whiteSpace = (lengthOfString >= 20) ? 'pre-wrap' : 'nowrap';
     event.target.style.wordBreak = (lengthOfString >= 20) ? 'break-all' : 'normal';
     event.target.parentElement.style.minHeight = (item.show === true) ? '300px' : '250px';
+    if (!item.show) {
+      event.target.scrollTop = 0;
+    }
   }
 
   public showTitle(item: any, event: any): void {
     const lengthOfString = item.title.length;
-    (lengthOfString >= 15) ? item.show = !item.show : item.show;
-    event.target.parentElement.style.minHeight = (item.show === true) ? '280px' : '250px';
+    (lengthOfString >= 15) ? item.showTitle = !item.showTitle : item.showTitle;
+    event.target.parentElement.style.minHeight = (item.showTitle === true) ? '280px' : '250px';
   }
 
   public setDefaultImage(item: Todo): void {
