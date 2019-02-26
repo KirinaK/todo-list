@@ -26,11 +26,10 @@ export class NewItemComponent implements OnInit {
   @Output() changeItem = new EventEmitter<Todo[]>();
   @Output() sortItem = new EventEmitter<Todo[]>();
 
-  constructor(private connectionService: ConnectionService) {
-    this.checkData();
-  }
+  constructor(private connectionService: ConnectionService) { }
 
   ngOnInit() {
+    this.checkData();
   }
 
   public addItem(): void {
