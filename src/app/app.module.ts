@@ -13,6 +13,7 @@ import { HeaderComponent } from './templates/header/header.component';
 import { MapComponent } from './templates/map/map.component';
 
 import { TodoItemService } from './services/todo-item.service';
+import { LoggingService } from './services/logging.service';
 
 import { ApiKey } from './constants/api-key.constants';
 
@@ -34,7 +35,7 @@ import { ApiKey } from './constants/api-key.constants';
       apiKey: ApiKey
     })
   ],
-  providers: [TodoItemService],
+  providers: [TodoItemService, LoggingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

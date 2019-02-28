@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ConnectionService } from '../../services/connection.service';
+import { LoggingService } from '../../services/logging.service';
 import { Todo } from '../../shared/todo';
 import { Regexp } from '../../constants/image-regexp.constants';
 import { environment } from '../../../environments/environment';
@@ -26,7 +27,8 @@ export class NewItemComponent implements OnInit {
   @Output() changeItem = new EventEmitter<Todo[]>();
   @Output() sortItem = new EventEmitter<Todo[]>();
 
-  constructor(private connectionService: ConnectionService) { }
+  constructor(private connectionService: ConnectionService,
+              private logger: LoggingService) { }
 
   ngOnInit() {
     this.checkData();
@@ -64,7 +66,7 @@ export class NewItemComponent implements OnInit {
         };
       },
       error => {
-        console.error(error.message);
+        this.logger.invokeConsoleMethod('error', `TodoPageComponent: ${error.message}`);
         return throwError(error);
       }
     );
