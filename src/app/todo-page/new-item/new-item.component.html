@@ -1,22 +1,24 @@
-<form class="form" [formGroup]="itemForm">
-  <label class="form__item">
-    title
-    <input type="text" formControlName="title" minlength="1" maxlength="25" required>
-  </label>
-  <label class="form__item">
-    description
-    <input type="text" formControlName="description" minlength="1" required>
-  </label>
-  <label class="form__item">
-    image
-    <input type="text" formControlName="img" required>
-  </label>
-  <label class="form__item">
-    date
-    <input type="date" formControlName="date" required>
-  </label>
+<div class="parent">
+  <form class="parent__form" [formGroup]="itemForm">
+    <label class="form__item">
+      title
+      <input type="text" formControlName="title" minlength="1" maxlength="25" required>
+    </label>
+    <label class="form__item">
+      description
+      <input type="text" formControlName="description" minlength="1" required>
+    </label>
+    <label class="form__item">
+      image
+      <input type="text" formControlName="img" required>
+    </label>
+    <label class="form__item">
+      date
+      <input type="date" formControlName="date" required>
+    </label>
 
-  <button class="btn" (click)="addItem()" [disabled]="!itemForm.valid" *ngIf="!changeButton">Add</button>
-  <button class="btn" (click)="updateItem()" [disabled]="!itemForm.valid" *ngIf="changeButton">Save</button>
-  <button class="btn btn_right" (click)="sorting()">Sort by Date</button>
-</form>
+    <button class="btn" (click)="addItem()" [disabled]="!itemForm.valid" *ngIf="!changeButton">Add</button>
+    <button class="btn" (click)="updateItem()" [disabled]="!itemForm.valid" *ngIf="changeButton">Save</button>
+    <button class="btn btn_right" (click)="sorting()">Sort by Date</button>
+  </form>
+</div>

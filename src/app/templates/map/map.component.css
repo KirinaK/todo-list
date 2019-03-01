@@ -9,3 +9,15 @@
 agm-map {
   height: 300px;
 }
+
+@media (max-width: 320px) {
+  .map {
+    height: 110px;
+  }
+}
+
+@media (min-width: 321px) and (max-width: 1024px) {
+  .map {
+    height: 130px;
+  }
+}

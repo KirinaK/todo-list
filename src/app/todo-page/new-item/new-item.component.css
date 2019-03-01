@@ -1,4 +1,4 @@
-.form {
+.parent__form {
   width: min-content;
   padding: 10px 30px;
   margin-top: 60px;
@@ -12,7 +12,7 @@
 }
 
 .form__item input {
-  margin: 5px 0 20px 0;
+  margin: 5px 0 10px;
   border: 1px solid #D6D6D6;
   border-radius: 7%;
   padding: 5px;
@@ -41,11 +41,19 @@
 }
 
 @media (max-width: 533px) {
-  .form {
-    margin-left: calc(100vw/9);
+  .parent__form {
+    border-right: none;
   }
 
-  .form__item input {
-    margin-bottom: 10px;
+  .parent {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 534px) and (max-width: 784px) {
+  .parent__form {
+    margin-left: 0;
+    position: fixed;
   }
 }
