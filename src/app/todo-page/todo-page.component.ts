@@ -4,9 +4,10 @@ import { HeaderComponent } from '../templates/header/header.component';
 import { MapComponent } from '../templates/map/map.component';
 import { TodoItemService } from '../services/todo-item.service';
 import { ConnectionService } from '../services/connection.service';
+import { LoggingService } from '../services/logging.service';
 import { DefaultImage } from '../constants/default-image.constants';
 import { Todo } from '../shared/todo';
-import { Subscription, throwError } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-todo-page',
@@ -18,7 +19,9 @@ export class TodoPageComponent implements OnInit {
   public itemsData: Todo[] = [];
   private subscription: Subscription;
 
-  constructor(private todoService: TodoItemService, private connectionService: ConnectionService) { }
+  constructor(private todoService: TodoItemService,
+              private connectionService: ConnectionService,
+              private logger: LoggingService) { }
 
   ngOnInit() {
     this.showTodos();
@@ -27,30 +30,21 @@ export class TodoPageComponent implements OnInit {
   private showTodos(): void {
     this.subscription = this.todoService.getAllTodoItems().subscribe(
       data => this.itemsData = data,
-      error => {
-        console.error(error.message);
-        return throwError(error);
-      }
+      error => this.logger.errorLog(error)
     );
   }
 
   public createItem(item: Todo): void {
     this.subscription = this.todoService.createTodoItem(item).subscribe(
       newItem => this.itemsData = this.itemsData.concat(newItem),
-      error => {
-        console.error(error.message);
-        return throwError(error);
-      }
+      error => this.logger.errorLog(error)
     );
   }
 
   public deleteItem(item: Todo): void {
     this.subscription = this.todoService.deleteTodoItem(item.id).subscribe(
       () => { this.itemsData = this.itemsData.filter(todo => todo.id !== item.id); },
-      error => {
-        console.error(error.message);
-        return throwError(error);
-      }
+      error => this.logger.errorLog(error)
     );
   }
 
@@ -58,10 +52,7 @@ export class TodoPageComponent implements OnInit {
     const currentItem = this.itemsData.find(todo => todo.id === item.id);
     this.subscription = this.todoService.updateTodoItem(item).subscribe(
       changedItem => Object.assign(currentItem, changedItem),
-      error => {
-        console.error(error.message);
-        return throwError(error);
-      }
+      error => this.logger.errorLog(error)
     );
   }
 
