@@ -1,20 +1,14 @@
-import { Injectable, isDevMode } from '@angular/core';
+import { Injectable, isDevMode, ErrorHandler } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoggingService {
-  private enabled = true;
-  private noop = () => {};
 
-  constructor() {
-    if (!isDevMode) this.enabled = false;
-  }
+  constructor(private errorHandler: ErrorHandler) { }
 
-  invokeConsoleMethod(type: string, args?: any): void {
-    if (this.enabled) {
-      const logFn: Function = (console)[type] || this.noop;
-      logFn.apply(console, [args]);
-    }
+  errorLog(error: Error): void {
+    const noop: Function = (): any => {};
+    (isDevMode) ? this.errorHandler.handleError(error.message) : noop;
   }
 }

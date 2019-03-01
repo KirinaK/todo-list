@@ -5,7 +5,7 @@ import { LoggingService } from '../../services/logging.service';
 import { Todo } from '../../shared/todo';
 import { Regexp } from '../../constants/image-regexp.constants';
 import { environment } from '../../../environments/environment';
-import { Subscription, throwError } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-new-item',
@@ -65,10 +65,7 @@ export class NewItemComponent implements OnInit {
           this.editItem(item);
         };
       },
-      error => {
-        this.logger.invokeConsoleMethod('error', `TodoPageComponent: ${error.message}`);
-        return throwError(error);
-      }
+      error => this.logger.errorLog(error)
     );
   }
 
