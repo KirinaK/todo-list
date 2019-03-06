@@ -1,7 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NewItemComponent } from './new-item/new-item.component';
-import { HeaderComponent } from '../templates/header/header.component';
-import { MapComponent } from '../templates/map/map.component';
 import { TodoItemService } from '../services/todo-item.service';
 import { ConnectionService } from '../services/connection.service';
 import { LoggingService } from '../services/logging.service';
@@ -17,6 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class TodoPageComponent implements OnInit {
   public itemsData: Todo[] = [];
+  public imageLoader = true;
   private subscription: Subscription;
 
   constructor(private todoService: TodoItemService,
@@ -69,9 +67,8 @@ export class TodoPageComponent implements OnInit {
   public showText(item: any, event: any): void {
     const lengthOfString = item.description.length;
     (lengthOfString >= 54) ? item.show = !item.show : item.show;
-    event.target.style.whiteSpace = (lengthOfString >= 20) ? 'pre-wrap' : 'nowrap';
     event.target.style.wordBreak = (lengthOfString >= 20) ? 'break-all' : 'normal';
-    event.target.parentElement.style.minHeight = (item.show === true) ? '300px' : '250px';
+    event.target.parentElement.style.minHeight = (item.show === true) ? '290px' : '240px';
     if (!item.show) {
       event.target.scrollTop = 0;
     }
@@ -80,7 +77,7 @@ export class TodoPageComponent implements OnInit {
   public showTitle(item: any, event: any): void {
     const lengthOfString = item.title.length;
     (lengthOfString >= 15) ? item.showTitle = !item.showTitle : item.showTitle;
-    event.target.parentElement.style.minHeight = (item.showTitle === true) ? '280px' : '250px';
+    event.target.parentElement.style.minHeight = (item.showTitle === true) ? '260px' : '240px';
   }
 
   public setDefaultImage(item: Todo): void {

@@ -20,7 +20,7 @@
 }
 
 .form__item input:active, :focus {
-  outline-color: #007ffa
+  outline-color: #007ffa;
 }
 
 .btn {
