@@ -63,7 +63,7 @@ export class NewItemComponent implements OnInit {
       item => {
         if (Object.keys(item).length !== 0) {
           this.editItem(item);
-        };
+        }
       },
       error => this.logger.errorLog(error)
     );

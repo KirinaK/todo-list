@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AboutConstant } from '../constants/about.constants';
-import { HeaderComponent } from '../templates/header/header.component';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +11,5 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 }

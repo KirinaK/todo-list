@@ -11,6 +11,7 @@ import { TodoPageComponent } from './todo-page/todo-page.component';
 import { NewItemComponent } from './todo-page/new-item/new-item.component';
 import { HeaderComponent } from './templates/header/header.component';
 import { MapComponent } from './templates/map/map.component';
+import { SpinnerComponent } from './templates/spinner/spinner.component';
 
 import { TodoItemService } from './services/todo-item.service';
 import { LoggingService } from './services/logging.service';
@@ -24,7 +25,8 @@ import { ApiKey } from './constants/api-key.constants';
     TodoPageComponent,
     NewItemComponent,
     HeaderComponent,
-    MapComponent
+    MapComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

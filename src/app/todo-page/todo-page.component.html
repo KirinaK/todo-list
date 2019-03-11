@@ -11,7 +11,14 @@
       <h2 class="todo-list__item-title" [ngClass]="{'showAllTitle': item.showTitle}" (click)="showTitle(item, $event)">{{item.title}}</h2>
       <p class="todo-list__item-description" [ngClass]="{'showAllText': item.show}" (click)="showText(item, $event)">{{item.description}}</p>
       <div class="todo-list__item-footer">
-        <img class="todo-list__item-image" src="{{item.img}}" (error)="setDefaultImage(item)">
+        <div class="spinner-wrapper">
+          <app-spinner [hidden]="!imageLoader"></app-spinner>
+        </div>
+        <img class="todo-list__item-image"
+             src="{{item.img}}"
+             [hidden]="imageLoader"
+             (load)="this.imageLoader = false;"
+             (error)="setDefaultImage(item)">
         <span class="todo-list__item-date">{{item.date}}</span>
         <span class="todo-list__item-edit" (click)="editItem(item)">edit</span>
       </div>

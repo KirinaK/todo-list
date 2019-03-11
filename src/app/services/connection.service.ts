@@ -7,7 +7,7 @@ import { Todo } from '../shared/todo';
 })
 export class ConnectionService {
   private todoItem: BehaviorSubject<any> = new BehaviorSubject({});
-  public todoData$: Observable<Todo> = this.todoItem.asObservable();;
+  public todoData$: Observable<Todo> = this.todoItem.asObservable();
 
   constructor() { }
 
