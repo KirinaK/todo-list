@@ -42,10 +42,10 @@ export class LoginComponent implements OnInit {
     const name = this.loginForm.value.name;
     const password = this.loginForm.value.password;
     if (this.checkData(name, password)) {
-      this.users.forEach(item => {
-        (item.name === name && item.password === password) ? this.id = item.id : null;
-      })
-      this.auth.sendToken(name);
+      this.users.forEach(user => {
+        (user.name === name && user.password === password) ? this.id = user.id : null;
+      });
+      this.auth.sendToken(this.id.toString());
       this.router.navigate(['/home/' + this.id]);
     }
     this.loginForm.reset();
@@ -54,19 +54,19 @@ export class LoginComponent implements OnInit {
   signup() {
     this.createUser = !this.isUserExist ? true : false;
     if (!this.isUserExist) {
-      this.users.filter(item => {
-        let lastId = (item.id === this.users.length) ? item.id : null;
+      this.users.filter(user => {
+        let lastId = (user.id === this.users.length) ? user.id : null;
         this.loginForm.controls['id'].setValue(++lastId);
       });
+      this.auth.sendToken(this.id.toString());
       this.loginService.createUser(this.loginForm.value).subscribe();
-      this.auth.sendToken(name);
       this.router.navigate(['/home/' + this.loginForm.value.id]);
     }
     this.loginForm.reset();
   }
 
   checkData(name, password) {
-    const user = this.users.filter(item => item.name === name);
+    const user = this.users.filter(user => user.name === name);
     this.isUserExist = (user.length === 1) ? true : false;
     if (this.isUserExist) return this.checkPassword(user, password);
     return this.isUserExist;

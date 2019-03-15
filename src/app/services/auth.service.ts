@@ -16,8 +16,8 @@ export class AuthService {
     return localStorage.getItem('LoggedInUser');
   }
 
-  isLoggedIn(): boolean {
-    return this.getToken() !== null;
+  isLoggedIn(id: number): boolean {
+    return +this.getToken() === id;
   }
 
   logout(): void {

@@ -8,11 +8,11 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  public id: string;
+  public id: number;
 
   constructor(private router: Router, public auth: AuthService) { }
 
   ngOnInit() {
-    this.id = this.router.url.match(/\d+/).toString();
+    this.id = +this.router.url.match(/\d+/);
   }
 }
