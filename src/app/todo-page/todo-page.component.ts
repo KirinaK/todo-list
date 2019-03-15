@@ -5,6 +5,7 @@ import { LoggingService } from '../services/logging.service';
 import { DefaultImage } from '../constants/default-image.constants';
 import { Todo } from '../shared/todo';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-page',
@@ -16,17 +17,20 @@ export class TodoPageComponent implements OnInit {
   public itemsData: Todo[] = [];
   public imageLoader = true;
   private subscription: Subscription;
+  private userId: number;
 
   constructor(private todoService: TodoItemService,
               private connectionService: ConnectionService,
-              private logger: LoggingService) { }
+              private logger: LoggingService,
+              private router: Router) { }
 
   ngOnInit() {
+    this.userId = +this.router.url.match(/\d+/);
     this.showTodos();
   }
 
   private showTodos(): void {
-    this.subscription = this.todoService.getAllTodoItems().subscribe(
+    this.subscription = this.todoService.getAllTodoItems(this.userId).subscribe(
       data => this.itemsData = data,
       error => this.logger.errorLog(error)
     );
@@ -41,7 +45,7 @@ export class TodoPageComponent implements OnInit {
 
   public deleteItem(item: Todo): void {
     this.subscription = this.todoService.deleteTodoItem(item.id).subscribe(
-      () => { this.itemsData = this.itemsData.filter(todo => todo.id !== item.id); },
+      () => this.itemsData = this.itemsData.filter(todo => todo.id !== item.id),
       error => this.logger.errorLog(error)
     );
   }
@@ -66,7 +70,7 @@ export class TodoPageComponent implements OnInit {
 
   public showText(item: any, event: any): void {
     const lengthOfString = item.description.length;
-    (lengthOfString >= 54) ? item.show = !item.show : item.show;
+    (lengthOfString >= 25) ? item.show = !item.show : item.show;
     event.target.style.wordBreak = (lengthOfString >= 20) ? 'break-all' : 'normal';
     event.target.parentElement.style.minHeight = (item.show === true) ? '290px' : '240px';
     if (!item.show) {

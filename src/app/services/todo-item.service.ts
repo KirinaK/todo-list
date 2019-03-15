@@ -16,8 +16,8 @@ export class TodoItemService {
 
   constructor(private http: HttpClient) { }
 
-  getAllTodoItems() {
-    return this.http.get<Todo[]>(this.apiURL + '/todo-items');
+  getAllTodoItems(id: number) {
+    return this.http.get<any>(this.apiURL + '/todo-items?userId=' + id);
   }
 
   createTodoItem(item: Todo) {

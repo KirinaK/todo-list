@@ -1,11 +1,13 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ConnectionService } from '../../services/connection.service';
 import { LoggingService } from '../../services/logging.service';
 import { Todo } from '../../shared/todo';
 import { Regexp } from '../../constants/image-regexp.constants';
 import { environment } from '../../../environments/environment';
 import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-new-item',
@@ -15,6 +17,7 @@ import { Subscription } from 'rxjs';
 export class NewItemComponent implements OnInit {
   public changeButton = false;
   public itemForm = new FormGroup({
+    userId: new FormControl(null),
     id: new FormControl(''),
     title: new FormControl(''),
     description: new FormControl(''),
@@ -22,24 +25,29 @@ export class NewItemComponent implements OnInit {
     date: new FormControl(''),
   });
   private subscription: Subscription;
+  private userId: number;
 
   @Output() addNewItem = new EventEmitter<Todo[]>();
   @Output() changeItem = new EventEmitter<Todo[]>();
   @Output() sortItem = new EventEmitter<Todo[]>();
 
   constructor(private connectionService: ConnectionService,
-              private logger: LoggingService) { }
+              private logger: LoggingService,
+              private router: Router) { }
 
   ngOnInit() {
+    this.userId = +this.router.url.match(/\d+/);
     this.checkData();
   }
 
   public addItem(): void {
+    this.itemForm.controls['userId'].setValue(this.userId);
     this.addNewItem.emit(this.itemForm.value);
     this.itemForm.reset();
   }
 
   public editItem(item): void {
+    this.itemForm.controls['userId'].setValue(this.userId);
     this.itemForm.controls['id'].setValue(item.id);
     this.itemForm.controls['title'].setValue(item.title);
     this.itemForm.controls['description'].setValue(item.description);

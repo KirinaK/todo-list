@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  public id: string;
 
-  constructor() { }
+  constructor(private router: Router, public auth: AuthService) { }
 
   ngOnInit() {
+    this.id = this.router.url.match(/\d+/).toString();
   }
-
 }

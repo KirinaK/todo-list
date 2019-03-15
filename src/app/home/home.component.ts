@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AboutConstant } from '../constants/about.constants';
+import { LoginPageService } from '../services/login-page.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,9 @@ import { AboutConstant } from '../constants/about.constants';
 export class HomeComponent implements OnInit {
   public about = AboutConstant;
 
-  constructor() { }
+  constructor(private loginService: LoginPageService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // this.loginService.getAllUsers().subscribe(res => console.log(res))
+  }
 }
