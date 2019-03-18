@@ -2,6 +2,7 @@
   <form class="container__login-form" [formGroup]="loginForm">
     <label class="login-form__name">
       name
+      <span class="tooltip">* Can't change after login!</span>
       <input type="text" formControlName="name" required>
     </label>
     <label class="login-form__password">
