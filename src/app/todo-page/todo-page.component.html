@@ -5,6 +5,7 @@
                 (changeItem)="updateItem($event)"
                 (sortItem)="sortingItems()"></app-new-item>
 
+  <p class="start-message" *ngIf="itemsData.length === 0">Start to add ToDo Items</p>
   <ul class="todo-list" *ngIf="itemsData.length > 0">
     <li class="todo-list__item" *ngFor="let item of itemsData">
       <span class="todo-list__item-delete" (click)="deleteItem(item)">x</span>

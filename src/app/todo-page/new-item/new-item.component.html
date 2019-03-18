@@ -17,8 +17,8 @@
       <input type="date" formControlName="date" required>
     </label>
 
-    <button class="btn" (click)="addItem()" [disabled]="!itemForm.valid" *ngIf="!changeButton">Add</button>
-    <button class="btn" (click)="updateItem()" [disabled]="!itemForm.valid" *ngIf="changeButton">Save</button>
-    <button class="btn btn_right" (click)="sorting()">Sort by Date</button>
+    <button class="form__btn" (click)="addItem()" [disabled]="!itemForm.valid" *ngIf="!changeButton">Add</button>
+    <button class="form__btn" (click)="updateItem()" [disabled]="!itemForm.valid" *ngIf="changeButton">Save</button>
+    <button class="form__btn btn_right" (click)="sorting()">Sort by Date</button>
   </form>
 </div>

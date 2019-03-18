@@ -13,6 +13,14 @@
   height: calc(100vh - 230px);
 }
 
+.start-message {
+  font-size: 2em;
+  color: #d5d5d5;
+  position: fixed;
+  left: 45%;
+  top: 25%;
+}
+
 .todo-list__item {
   width: 210px;
   height: 240px;
@@ -102,13 +110,23 @@
     left: 0;
     width: 100vw;
   }
+
+  .start-message {
+    font-size: 0.92em;
+    top: 60%;
+    transform: translate(-40%, 0);
+  }
 }
 
-@media (min-width: 534px) and (max-width: 784px) {
+@media (min-width: 534px) and (max-width: 783px) {
   .todo-list {
     width: 66.6vw;
     padding-left: 0;
     margin-bottom: 200px;
+  }
+
+  .start-message {
+    left: 55%;
   }
 }
 
@@ -125,7 +143,7 @@
 
 @media (min-width: 785px) and (max-width: 1024px) {
   .todo-list {
-    justify-content: center;
+    justify-content: flex-start;
     padding-left: 0;
   }
 }
