@@ -34,6 +34,18 @@ input:active, :focus {
   outline-color: #007ffa;
 }
 
+.tooltip {
+  display: none;
+}
+
+.login-form__name:hover .tooltip {
+  display: inline-block;
+  font-size: 0.6em;
+  vertical-align: top;
+  text-transform: none;
+  color: #EF1515;
+}
+
 .login-form__btn {
   width: auto;
   border-radius: 10%;
