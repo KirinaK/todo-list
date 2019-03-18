@@ -38,6 +38,7 @@
   background-color: #D6D6D6;
 }
 
+/* TODO: user flexbox instead and change it everywhere */
 .right {
   float: right;
   margin-top: -5px;

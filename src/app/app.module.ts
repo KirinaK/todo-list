@@ -22,6 +22,7 @@ import { LoggingService } from './services/logging.service';
 
 import { AuthGuard } from './guards/auth.guard';
 
+/* TODO: find a way to somehow not to download this file each time */
 import { ApiKey } from './constants/api-key.constants';
 
 @NgModule({

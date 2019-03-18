@@ -1,6 +1,9 @@
+<!-- TODO: change class name because this is not relevant name -->
 <div class="container">
   <form class="container__login-form" [formGroup]="loginForm">
+    <!-- TODO: Not valid BEM -->
     <label class="login-form__name">
+      <!-- TODO: wrap it into the span element -->
       name
       <span class="tooltip">* Can't change after login!</span>
       <input type="text" formControlName="name" required>

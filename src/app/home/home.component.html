@@ -1,17 +1,23 @@
 <app-header></app-header>
 
+<!-- TODO: why the name of the file and name of the component is `home` but the class name of the block is `info` ??? -->
 <div class="info" *ngIf="about">
   <div class="info__user">
+    <!-- TODO: Not valid BEM -->
+    <!-- TODO: why do not do like this [src]="about.photo" ??? -->
     <img class="user__image" src="{{about.photo}}" (error)="setDefaultPhoto()">
     <img class="user__edit" src="assets/edit.svg" (click)="showElements()">
   </div>
   <div class="info__change">
+    <!-- TODO: Not valid BEM -->
+    <!-- TODO: also try to swap x but a unicode character for it -->
     <button class="info__btn-cancel" (click)="hideElements()">x</button>
     <input class="info__link" [(ngModel)]="photoLink" type="text" placeholder="Enter link of new photo">
     <button class="info__btn-submit" (click)="editPhoto(about)" [disabled]="!photoLink">+</button>
   </div>
   <div class="info__main">
     <p class="info__name">{{about.name}}</p>
+    <!-- TODO: Not valid BEM -->
     <p class="user__date">{{about.date}}</p>
     <p class="info__about">{{about.content}}</p>
   </div>

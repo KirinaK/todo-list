@@ -1,3 +1,11 @@
+/*
+  TODO:
+  1) Rename animation for the spinners
+  2) Move animations to the bottom of the page
+  3) Get rid of prefix properties - it's better to use PostCSS + Autoprefixer
+  4) Why this is global? Not in the component folder?
+  5) ???
+ */
 @keyframes lds-spinner {
   0% {
     opacity: 1;

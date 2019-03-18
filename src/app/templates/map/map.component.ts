@@ -26,6 +26,7 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit() {
+    // TODO: remove it because it's empty
   }
 
   private getCurrentPosition(): void {

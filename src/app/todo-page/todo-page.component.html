@@ -1,5 +1,6 @@
 <app-header></app-header>
-
+<!-- TODO: Bad formatting -->
+<!-- TODO: NOT valid BEM -->
 <main>
   <app-new-item (addNewItem)="createItem($event)"
                 (changeItem)="updateItem($event)"
@@ -13,8 +14,10 @@
       <p class="todo-list__item-description" [ngClass]="{'showAllText': item.show}" (click)="showText(item, $event)">{{item.description}}</p>
       <div class="todo-list__item-footer">
         <div class="spinner-wrapper">
+          <!-- TODO: bad naming for the component -->
           <app-spinner [hidden]="!imageLoader"></app-spinner>
         </div>
+        <!-- TODO: use [src] instead -->
         <img class="todo-list__item-image"
              src="{{item.img}}"
              [hidden]="imageLoader"

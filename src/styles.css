@@ -1,8 +1,12 @@
+/* TODO: move it into the app folder */
+
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 body {
+  /* TODO: add backup font for the application */
   font-family: 'Montserrat', sans-serif;
+  /* Instead of this use reset.css or normalize.css */
   margin: 0;
   padding: 0;
 }

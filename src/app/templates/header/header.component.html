@@ -1,4 +1,5 @@
 <header class="header">
+  <!-- TODO: where is the class -->
   <nav>
     <a *ngIf="auth.isLoggedIn(id)" class="header__link" href="/home/{{id}}">About</a>
     <a *ngIf="auth.isLoggedIn(id)" class="header__link" href="/todo/{{id}}">ToDo List</a>
