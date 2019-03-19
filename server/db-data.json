@@ -6,23 +6,47 @@
       "password": "123456789",
       "date": "6, June, 1997",
       "content": "1.5+ years of experience in web programming. Extensive knowledge of JavaScript, Angular 2+, HTML5, CSS3, Responsive Design and modern Web techniques. Responsible and capable single and team player who can successfully cope with handle her job. Good communication skills.",
-      "photo": "https://avatars1.githubusercontent.com/u/29666138?s=460&v=4"
+      "photo": "http://respek.info/postimageswatermark/974/1_full.jpg"
     },
     {
       "id": 2,
       "name": "123",
       "password": "123123",
+      "date": "7, July, 1990",
+      "content": "old the you totally does mrs no saw bed he yet in like favourable answered do few on Not first an narrow against thus agreeable true up disposed children On of to mr for its easily why valley have ask Rose such ecstatic he Garden situation set in do if nay where you wished things little half ought humoured partiality is six desirous their terms questions Likewise wholly Her Total favourite.",
       "photo": "https://images.unsplash.com/photo-1516865853771-3b22301e4adb?ixlib=rb-1.2.1&q=99&fm=jpg&crop=entropy&cs=tinysrgb&w=2048&fit=max&ixid=eyJhcHBfaWQiOjcwOTV9"
     },
     {
       "id": 3,
       "name": "1234",
-      "password": "1234"
+      "password": "1234",
+      "date": "26, September, 2003",
+      "content": "as had down next simplicity Depending greatest projection expense two simple supposing me off on my or residence Visited Collected in Entered deal or Money Expres",
+      "photo": "https://images.unsplash.com/photo-1537531579368-1af433cf6f06?ixlib=rb-1.2.1&q=99&fm=jpg&crop=entropy&cs=tinysrgb&w=2048&fit=max&ixid=eyJhcHBfaWQiOjcwOTV9"
     },
     {
       "id": 4,
-      "name": "12345",
-      "password": "12345"
+      "name": "alex",
+      "password": "alex",
+      "date": null,
+      "content": null,
+      "photo": "https://images.unsplash.com/photo-1537531579368-1af433cf6f06?ixlib=rb-1.2.1&q=99&fm=jpg&crop=entropy&cs=tinysrgb&w=2048&fit=max&ixid=eyJhcHBfaWQiOjcwOTV9"
+    },
+    {
+      "id": 5,
+      "name": "123456",
+      "password": "123456",
+      "date": null,
+      "content": null,
+      "photo": null
+    },
+    {
+      "id": 6,
+      "name": "a3a3",
+      "password": "123456789",
+      "date": null,
+      "content": null,
+      "photo": null
     }
   ],
   "todo-items": [
@@ -30,7 +54,7 @@
       "userId": 1,
       "id": 2,
       "title": "1234dfbdfbgda",
-      "description": "123412341234123dgdfgdg",
+      "description": "123412341234123dgd",
       "img": "https://www.w3schools.com/howto/img_forest.jpg",
       "date": "2019-02-14"
     },
@@ -43,20 +67,28 @@
       "date": "2019-02-23"
     },
     {
-      "userId": 1,
-      "id": 8,
-      "title": "123451245242134123412",
-      "description": "kikikikikikiki",
-      "img": "https://www.w3schools.com/howto/img_mountains.jpg",
-      "date": "2019-02-22"
-    },
-    {
       "userId": 2,
       "id": 15,
       "title": "123412341234",
       "description": "123412341234",
       "img": "https://www.w3schools.com/howto/img_forest.jpg",
       "date": "2019-03-14"
+    },
+    {
+      "userId": 1,
+      "id": 16,
+      "title": "12341234",
+      "description": "123412341234",
+      "img": "https://farm4.staticflickr.com/3910/14863560864_d5ce12631a_k.jpg",
+      "date": "2019-03-29"
+    },
+    {
+      "userId": 1,
+      "id": 17,
+      "title": "21341234",
+      "description": "12341234",
+      "img": "https://www.w3schools.com/howto/img_forest.jpg",
+      "date": "2018-12-12"
     }
   ]
 }

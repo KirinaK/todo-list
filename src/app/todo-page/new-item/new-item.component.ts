@@ -21,7 +21,7 @@ export class NewItemComponent implements OnInit {
     id: new FormControl(''),
     title: new FormControl(''),
     description: new FormControl(''),
-    img: new FormControl('', Validators.pattern(Regexp)),
+    img: new FormControl(''),
     date: new FormControl(''),
   });
   private subscription: Subscription;
