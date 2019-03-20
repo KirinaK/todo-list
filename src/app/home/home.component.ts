@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     const userId = +this.router.url.match(/\d+/);
-    this.getUserInfo(userId);
+    setTimeout(() => {this.getUserInfo(userId)}, 1000);
   }
 
   getUserInfo(userId) {

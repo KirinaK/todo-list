@@ -14,7 +14,10 @@ export class LoginComponent implements OnInit {
   public loginForm = new FormGroup({
     id: new FormControl(null),
     name: new FormControl(''),
-    password: new FormControl('')
+    password: new FormControl(''),
+    date: new FormControl(''),
+    content: new FormControl(''),
+    photo: new FormControl('')
   });
   public isUserExist: boolean = true;
   public createUser: boolean = true;
@@ -52,11 +55,15 @@ export class LoginComponent implements OnInit {
   }
 
   signup() {
+    const name = this.loginForm.value.name;
+    const password = this.loginForm.value.password;
+    this.checkData(name, password);
     this.createUser = !this.isUserExist ? true : false;
     if (!this.isUserExist) {
       this.users.filter(user => {
         let lastId = (user.id === this.users.length) ? user.id : null;
         this.loginForm.controls['id'].setValue(++lastId);
+        this.id = this.loginForm.controls['id'].value;
       });
       this.auth.sendToken(this.id.toString());
       this.loginService.createUser(this.loginForm.value).subscribe();
