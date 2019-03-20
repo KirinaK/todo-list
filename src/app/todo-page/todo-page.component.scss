@@ -1,4 +1,4 @@
-.todo-list {
+.todo-page__list {
   padding-top: 60px;
   margin-top: 0;
   list-style-type: none;
@@ -13,7 +13,7 @@
   height: calc(100vh - 230px);
 }
 
-.start-message {
+.todo-page__start-message {
   font-size: 2em;
   color: #d5d5d5;
   position: fixed;
@@ -21,7 +21,7 @@
   top: 25%;
 }
 
-.todo-list__item {
+.todo-page__list-item {
   width: 210px;
   height: 240px;
   max-height: 330px;
@@ -33,31 +33,33 @@
   cursor: pointer;
 }
 
-.todo-list__item:hover {
+.todo-page__list-item:hover {
   transform: scale(1.02);
   background: linear-gradient(to bottom, #EAE5F0, #E5FDFF);
 }
 
-.todo-list__item-title {
+.todo-page__list-item-title {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-top: 10px;
 }
 
-.todo-list__item-delete, .todo-list__item-edit {
+.todo-page__list-item-delete,
+.todo-page__list-item-edit {
   float: right;
 }
 
-.todo-list__item-delete{
+.todo-page__list-item-delete {
   font-weight: bold;
   padding: 5px;
 }
 
-.todo-list__item-delete:hover, .todo-list__item-edit:hover {
+.todo-page__list-item-delete:hover,
+.todo-page__list-item-edit:hover {
   transform: scale(1.25);
 }
 
-.todo-list__item-description {
+.todo-page__list-item-description {
   height: 20px;
   margin: 0 5px;
   overflow: hidden;
@@ -81,7 +83,7 @@
   word-wrap: break-word;
 }
 
-.todo-list__item-footer {
+.todo-page__list-item-footer {
   width: 90%;
   bottom: 10px;
   left: 0;
@@ -90,7 +92,7 @@
   position: absolute;
 }
 
-.todo-list__item-image {
+.todo-page__list-item-image {
   width: 200px;
   height: 100px;
   display: block;
@@ -98,20 +100,20 @@
   margin-bottom: 15px;
 }
 
-.spinner-wrapper {
+.todo-page__list-item-footer-spinner-wrapper {
   position: relative;
   top: 60px;
   left: 50%;
 }
 
 @media (max-width: 533px) {
-  .todo-list {
+  .todo-page__list {
     padding: 20px 0 130px;
     left: 0;
     width: 100vw;
   }
 
-  .start-message {
+  .todo-page__start-message {
     font-size: 0.92em;
     top: 60%;
     transform: translate(-40%, 0);
@@ -119,19 +121,19 @@
 }
 
 @media (min-width: 534px) and (max-width: 783px) {
-  .todo-list {
+  .todo-page__list {
     width: 66.6vw;
     padding-left: 0;
     margin-bottom: 200px;
   }
 
-  .start-message {
+  .todo-page__start-message {
     left: 55%;
   }
 }
 
 @media (max-width: 784px) {
-  .todo-list {
+  .todo-page__list {
     flex-direction: column;
     flex-wrap: inherit;
     align-items: center;
@@ -142,7 +144,7 @@
 }
 
 @media (min-width: 785px) and (max-width: 1024px) {
-  .todo-list {
+  .todo-page__list {
     justify-content: flex-start;
     padding-left: 15px;
   }

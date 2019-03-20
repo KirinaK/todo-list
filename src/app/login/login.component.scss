@@ -1,4 +1,4 @@
-.container {
+.login {
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -9,20 +9,21 @@
   background: linear-gradient(to bottom, #EAE5F0, #E5FDFF);
 }
 
-.container__login-form {
+.login__form {
   width: min-content;
   min-height: 244px;
   padding: 10px 30px;
   margin-top: -100px;
 }
 
-.login-form__name, .login-form__password {
+.login__form-title {
   font-size: 1.2em;
   width: auto;
+  display: inline-block;
   text-transform: capitalize;
 }
 
-input {
+.login__form-input {
   margin: 5px 0 13px;
   border: 1px solid #D6D6D6;
   border-radius: 7%;
@@ -30,15 +31,15 @@ input {
   width: 250px;
 }
 
-input:active, :focus {
+.login__form-input:active, :focus {
   outline-color: #007ffa;
 }
 
-.tooltip {
+.login__form-tooltip {
   display: none;
 }
 
-.login-form__name:hover .tooltip {
+.login__form-name:hover .login__form-tooltip {
   display: inline-block;
   font-size: 0.6em;
   vertical-align: top;
@@ -46,7 +47,7 @@ input:active, :focus {
   color: #EF1515;
 }
 
-.login-form__btn {
+.login__form-btn {
   width: auto;
   border-radius: 10%;
   font-family: 'Montserrat';
@@ -55,11 +56,11 @@ input:active, :focus {
   background-color: #D6D6D6;
 }
 
-.login-form__btn:focus {
+.login__form-btn:focus {
   outline: none;
 }
 
-.btn_right {
+.login__form-btn_right {
   float: right;
 }
 

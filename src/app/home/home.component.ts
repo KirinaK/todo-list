@@ -1,17 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginPageService } from '../services/login-page.service';
-import { LoggingService } from '../services/logging.service';
-import { DefaultImage } from '../constants/default-image.constants';
-import { UserInfo } from '../shared/user-info.interface';
+import { LoginPageService } from '../shared/services/login/login-page.service';
+import { LoggingService } from '../shared/services/logging/logging.service';
+import { DefaultImage } from '../shared/constants/default-image.constants';
+import { UserInfo } from '../shared/interfaces/user-info.interface';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   public about: UserInfo;
   public photoLink: string;
   public userDate: Date;
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     const userId = +this.router.url.match(/\d+/);
-    setTimeout(() => {this.getUserInfo(userId)}, 1000);
+    setTimeout(() => this.getUserInfo(userId), 1000);
   }
 
   getUserInfo(userId) {
@@ -41,9 +41,9 @@ export class HomeComponent implements OnInit {
   }
 
   showElements(): void {
-    this.btnSubmit = document.getElementsByClassName('info__btn-submit')[0] as HTMLElement;
-    this.btnCancel = document.getElementsByClassName('info__btn-cancel')[0] as HTMLElement;
-    this.input = document.getElementsByClassName('info__link')[0] as HTMLInputElement;
+    this.btnSubmit = document.getElementsByClassName('home__change-btn-submit')[0] as HTMLElement;
+    this.btnCancel = document.getElementsByClassName('home__change-btn-cancel')[0] as HTMLElement;
+    this.input = document.getElementsByClassName('home__change-link')[0] as HTMLInputElement;
     this.btnSubmit.style.display = 'inline-block';
     this.btnCancel.style.display = 'inline-block';
     this.input.style.display = 'inline-block';

@@ -1,25 +1,25 @@
-.info {
+.home {
   padding: 60px 20px;
   text-align: center;
 }
 
-.info__user {
+.home__user {
   position: relative;
   display: inline-block;
 }
 
-.info__user:hover .user__edit {
+.home__user:hover .home__user-edit {
   display: block;
 }
 
-.user__image {
+.home__user-image {
   width: 150px;
   height: 150px;
   border-radius: 50%;
   display: block;
 }
 
-.user__edit {
+.home__user-edit {
   width: 15px;
   height: 15px;
   padding-top: 7px;
@@ -30,7 +30,7 @@
   display: none;
 }
 
-.info__link {
+.home__change-link {
   border: none;
   border-bottom: #D6D6D6 1px solid;
   padding: 7px;
@@ -39,11 +39,12 @@
   display: none;
 }
 
-.info__link::placeholder {
+.home__change-link::placeholder {
   text-align: center;
 }
 
-.info__btn-submit, .info__btn-cancel  {
+.home__change-btn-submit,
+.home__change-btn-cancel {
   border: none;
   background: transparent;
   cursor: pointer;
@@ -52,22 +53,22 @@
   vertical-align: middle;
 }
 
-.info__btn-submit {
+.home__change-btn-submit {
   font-size: 1.3em;
 }
 
-.info__about {
+.home__main-about {
   width: 50%;
   margin: 0 auto;
   text-align: justify;
 }
 
-.info__main {
+.home__main {
   margin: auto;
 }
 
 @media (max-width: 1024px) {
-  .info__about {
+  .home__main-about {
     width: 75%;
   }
 }

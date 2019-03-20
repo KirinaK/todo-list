@@ -1,18 +1,27 @@
-<div class="container">
-  <form class="container__login-form" [formGroup]="loginForm">
-    <label class="login-form__name">
-      name
-      <span class="tooltip">* Can't change after login!</span>
-      <input type="text" formControlName="name" required>
+<div class="login">
+  <form class="login__form" [formGroup]="loginForm">
+    <label class="login__form-name">
+      <span class="login__form-title">name</span>
+      <span class="login__form-tooltip">* Can't change after login!</span>
+      <input type="text" class="login__form-input" formControlName="name"
+        required>
     </label>
-    <label class="login-form__password">
-      password
-      <input type="password" formControlName="password" required>
+    <label class="login__form-password">
+      <span class="login__form-title">password</span>
+      <input type="password" class="login__form-input" formControlName="password"
+        required>
     </label>
-    <button type="submit" class="login-form__btn" (click)="login()" [disabled]="!loginForm.valid">Login</button>
-    <button type="submit" class="login-form__btn btn_right" (click)="signup()" [disabled]="!loginForm.valid">Sign Up</button>
-    <p [ngClass]="isUserExist ? 'hideError' : 'showError'">Can't find this user.</p>
-    <p [ngClass]="(isCorrect || !createUser) ? 'hideError' : 'showError'">Check data.</p>
-    <p [ngClass]="createUser ? 'hideError' : 'showError'">This user already exist.</p>
+    <button type="submit" class="login__form-btn" (click)="login()" [disabled]="!loginForm.valid">Login</button>
+    <button type="submit" class="login__form-btn login__form-btn_right" (click)="signup()"
+      [disabled]="!loginForm.valid">Sign Up</button>
+    <p [ngClass]="isUserExist ? 'hideError' : 'showError'">
+      Can't find this user.
+    </p>
+    <p [ngClass]="(isCorrect || !createUser) ? 'hideError' : 'showError'">
+      Check data.
+    </p>
+    <p [ngClass]="createUser ? 'hideError' : 'showError'">
+      This user already exist.
+    </p>
   </form>
 </div>
