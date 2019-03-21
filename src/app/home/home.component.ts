@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+import { defaultImageSrc } from '../shared/constants/constants';
 import { LoginPageService } from '../shared/services/login/login-page.service';
 import { LoggingService } from '../shared/services/logging/logging.service';
-import { DefaultImage } from '../shared/constants/default-image.constants';
 import { UserInfo } from '../shared/interfaces/user-info.interface';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  public about: UserInfo;
+  public user: UserInfo;
   public photoLink: string;
   public userDate: Date;
   private input: HTMLInputElement;
@@ -20,24 +21,30 @@ export class HomeComponent implements OnInit, OnDestroy {
   private btnCancel: HTMLElement;
   private subscription: Subscription;
 
-  constructor(private loginService: LoginPageService,
-              private router: Router,
-              private logging: LoggingService) { }
+  constructor(
+    private loginService: LoginPageService,
+    private router: Router,
+    private logging: LoggingService
+  ) { }
 
   ngOnInit() {
     const userId = +this.router.url.match(/\d+/);
     setTimeout(() => this.getUserInfo(userId), 1000);
   }
 
-  getUserInfo(userId) {
+  ngOnDestroy() {
+    this.subscription && this.subscription.unsubscribe();
+  }
+
+  getUserInfo(userId: number): void {
     this.subscription = this.loginService.getUser(userId).subscribe(
       user => this.showInfo(user),
       error => this.logging.errorLog(error)
     );
   }
 
-  showInfo(data) {
-    this.about = data;
+  showInfo(data: UserInfo): void {
+    this.user = data;
   }
 
   showElements(): void {
@@ -58,19 +65,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   editPhoto(data: UserInfo): void {
     data.photo = this.photoLink;
-    const newData = data;
-    this.subscription = this.loginService.updateUser(newData).subscribe(
-      result => newData,
+    this.subscription = this.loginService.updateUser(data).subscribe(
+      result => data,
       error => this.logging.errorLog(error)
     );
     this.hideElements();
   }
 
-  setDefaultPhoto() {
-    this.about.photo = DefaultImage;
-  }
-
-  ngOnDestroy() {
-    this.subscription && this.subscription.unsubscribe();
+  setDefaultPhoto(): void {
+    this.user.photo = defaultImageSrc;
   }
 }

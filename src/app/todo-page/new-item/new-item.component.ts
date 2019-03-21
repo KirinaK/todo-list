@@ -1,12 +1,13 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ConnectionService } from '../../shared/services/connection/connection.service';
-import { LoggingService } from '../../shared/services/logging/logging.service';
-import { Todo } from '../../shared/interfaces/todo';
-import { Regexp } from '../../shared/constants/image-regexp.constants';
-import { environment } from '../../../environments/environment';
 import { Subscription } from 'rxjs';
+
+import { ConnectionService } from '../../shared/services/connection/connection.service';
+import { environment } from '../../../environments/environment';
+import { LoggingService } from '../../shared/services/logging/logging.service';
+import { regexp } from '../../shared/constants/constants';
+import { Todo } from '../../shared/interfaces/todo';
 
 
 @Component({
@@ -31,13 +32,19 @@ export class NewItemComponent implements OnInit, OnDestroy {
   @Output() changeItem = new EventEmitter<Todo[]>();
   @Output() sortItem = new EventEmitter<Todo[]>();
 
-  constructor(private connectionService: ConnectionService,
-              private logger: LoggingService,
-              private router: Router) { }
+  constructor(
+    private connectionService: ConnectionService,
+    private logger: LoggingService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.userId = +this.router.url.match(/\d+/);
     this.checkData();
+  }
+
+  ngOnDestroy() {
+    this.subscription && this.subscription.unsubscribe();
   }
 
   public addItem(): void {
@@ -46,7 +53,7 @@ export class NewItemComponent implements OnInit, OnDestroy {
     this.itemForm.reset();
   }
 
-  public editItem(item): void {
+  public editItem(item: Todo): void {
     this.itemForm.controls['userId'].setValue(this.userId);
     this.itemForm.controls['id'].setValue(item.id);
     this.itemForm.controls['title'].setValue(item.title);
@@ -75,9 +82,5 @@ export class NewItemComponent implements OnInit, OnDestroy {
       },
       error => this.logger.errorLog(error)
     );
-  }
-
-  ngOnDestroy() {
-    this.subscription && this.subscription.unsubscribe();
   }
 }

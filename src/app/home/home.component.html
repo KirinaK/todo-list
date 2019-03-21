@@ -1,19 +1,19 @@
 <app-header></app-header>
-<div class="home" *ngIf="about">
+<div class="home" *ngIf="user">
   <div class="home__user">
-    <img class="home__user-image" [src]="about.photo" (error)="setDefaultPhoto()">
+    <img class="home__user-image" [src]="user.photo" (error)="setDefaultPhoto()">
     <img class="home__user-edit" src="assets/img/edit.svg" (click)="showElements()">
   </div>
   <div class="home__change">
     <button class="home__change-btn-cancel" (click)="hideElements()">&#9747;</button>
     <input class="home__change-link" [(ngModel)]="photoLink" type="text"
       placeholder="Enter link of new photo">
-    <button class="home__change-btn-submit" (click)="editPhoto(about)"
+    <button class="home__change-btn-submit" (click)="editPhoto(user)"
       [disabled]="!photoLink">&#43;</button>
   </div>
   <div class="home__main">
-    <p class="home__main-name">{{about.name}}</p>
-    <p class="home__main-date">{{about.date}}</p>
-    <p class="home__main-about">{{about.content}}</p>
+    <p class="home__main-name">{{user.name}}</p>
+    <p class="home__main-date">{{user.date}}</p>
+    <p class="home__main-about">{{user.content}}</p>
   </div>
 </div>
