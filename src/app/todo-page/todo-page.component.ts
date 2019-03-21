@@ -1,19 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TodoItemService } from '../services/todo-item.service';
-import { ConnectionService } from '../services/connection.service';
-import { LoggingService } from '../services/logging.service';
-import { DefaultImage } from '../constants/default-image.constants';
-import { Todo } from '../shared/todo';
+import { TodoItemService } from '../shared/services/todo-item/todo-item.service';
+import { ConnectionService } from '../shared/services/connection/connection.service';
+import { LoggingService } from '../shared/services/logging/logging.service';
+import { DefaultImage } from '../shared/constants/default-image.constants';
+import { Todo } from '../shared/interfaces/todo';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-page',
   templateUrl: './todo-page.component.html',
-  styleUrls: ['./todo-page.component.css'],
+  styleUrls: ['./todo-page.component.scss'],
   providers: [TodoItemService]
 })
-export class TodoPageComponent implements OnInit {
+export class TodoPageComponent implements OnInit, OnDestroy {
   public itemsData: Todo[] = [];
   public imageLoader = true;
   private subscription: Subscription;

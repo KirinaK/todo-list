@@ -1,18 +1,19 @@
 <app-header></app-header>
-
-<div class="info" *ngIf="about">
-  <div class="info__user">
-    <img class="user__image" src="{{about.photo}}" (error)="setDefaultPhoto()">
-    <img class="user__edit" src="assets/edit.svg" (click)="showElements()">
+<div class="home" *ngIf="about">
+  <div class="home__user">
+    <img class="home__user-image" [src]="about.photo" (error)="setDefaultPhoto()">
+    <img class="home__user-edit" src="assets/img/edit.svg" (click)="showElements()">
   </div>
-  <div class="info__change">
-    <button class="info__btn-cancel" (click)="hideElements()">x</button>
-    <input class="info__link" [(ngModel)]="photoLink" type="text" placeholder="Enter link of new photo">
-    <button class="info__btn-submit" (click)="editPhoto(about)" [disabled]="!photoLink">+</button>
+  <div class="home__change">
+    <button class="home__change-btn-cancel" (click)="hideElements()">&#9747;</button>
+    <input class="home__change-link" [(ngModel)]="photoLink" type="text"
+      placeholder="Enter link of new photo">
+    <button class="home__change-btn-submit" (click)="editPhoto(about)"
+      [disabled]="!photoLink">&#43;</button>
   </div>
-  <div class="info__main">
-    <p class="info__name">{{about.name}}</p>
-    <p class="user__date">{{about.date}}</p>
-    <p class="info__about">{{about.content}}</p>
+  <div class="home__main">
+    <p class="home__main-name">{{about.name}}</p>
+    <p class="home__main-date">{{about.date}}</p>
+    <p class="home__main-about">{{about.content}}</p>
   </div>
 </div>

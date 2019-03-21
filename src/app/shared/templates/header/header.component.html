@@ -1,0 +1,9 @@
+<header class="header">
+  <nav class="header__nav">
+    <a *ngIf="auth.isLoggedIn(id)" class="header__nav-link" href="/home/{{id}}">About</a>
+    <a *ngIf="auth.isLoggedIn(id)" class="header__nav-link" href="/todo/{{id}}">ToDo
+      List</a>
+    <a *ngIf="auth.isLoggedIn(id)" class="header__nav-link header__nav-link_right"
+      href="" (click)="auth.logout()">Logout</a>
+  </nav>
+</header>

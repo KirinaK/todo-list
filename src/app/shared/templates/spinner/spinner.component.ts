@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import '../../../../spinner-style.scss';
 
 @Component({
-  selector: 'app-spinner',
-  templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.css']
+  selector: 'spinner',
+  templateUrl: './spinner.component.html'
 })
 export class SpinnerComponent implements OnInit {
 

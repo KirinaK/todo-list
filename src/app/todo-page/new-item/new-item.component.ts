@@ -1,20 +1,20 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ConnectionService } from '../../services/connection.service';
-import { LoggingService } from '../../services/logging.service';
-import { Todo } from '../../shared/todo';
-import { Regexp } from '../../constants/image-regexp.constants';
+import { ConnectionService } from '../../shared/services/connection/connection.service';
+import { LoggingService } from '../../shared/services/logging/logging.service';
+import { Todo } from '../../shared/interfaces/todo';
+import { Regexp } from '../../shared/constants/image-regexp.constants';
 import { environment } from '../../../environments/environment';
 import { Subscription } from 'rxjs';
 
 
 @Component({
-  selector: 'app-new-item',
+  selector: 'new-item',
   templateUrl: './new-item.component.html',
-  styleUrls: ['./new-item.component.css']
+  styleUrls: ['./new-item.component.scss']
 })
-export class NewItemComponent implements OnInit {
+export class NewItemComponent implements OnInit, OnDestroy {
   public changeButton = false;
   public itemForm = new FormGroup({
     userId: new FormControl(null),

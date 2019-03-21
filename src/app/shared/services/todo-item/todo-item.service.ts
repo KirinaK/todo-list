@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { pipe } from 'rxjs';
-import { environment } from '../../environments/environment';
-import { Todo } from '../shared/todo';
+import { environment } from '../../../../environments/environment';
+import { Todo } from '../../interfaces/todo';
 
 @Injectable({
   providedIn: 'root'

@@ -1,30 +1,28 @@
 <app-header></app-header>
-
-<main>
-  <app-new-item (addNewItem)="createItem($event)"
-                (changeItem)="updateItem($event)"
-                (sortItem)="sortingItems()"></app-new-item>
-
-  <p class="start-message" *ngIf="itemsData.length === 0">Start to add ToDo Items</p>
-  <ul class="todo-list" *ngIf="itemsData.length > 0">
-    <li class="todo-list__item" *ngFor="let item of itemsData">
-      <span class="todo-list__item-delete" (click)="deleteItem(item)">x</span>
-      <h2 class="todo-list__item-title" [ngClass]="{'showAllTitle': item.showTitle}" (click)="showTitle(item, $event)">{{item.title}}</h2>
-      <p class="todo-list__item-description" [ngClass]="{'showAllText': item.show}" (click)="showText(item, $event)">{{item.description}}</p>
-      <div class="todo-list__item-footer">
-        <div class="spinner-wrapper">
-          <app-spinner [hidden]="!imageLoader"></app-spinner>
+<main class="todo-page">
+  <new-item (addNewItem)="createItem($event)"
+            (changeItem)="updateItem($event)"
+            (sortItem)="sortingItems()"></new-item>
+  <p class="todo-page__start-message" *ngIf="itemsData.length === 0">
+    Start to add ToDo Items
+  </p>
+  <ul class="todo-page__list" *ngIf="itemsData.length > 0">
+    <li class="todo-page__list-item" *ngFor="let item of itemsData">
+      <span class="todo-page__list-item-delete" (click)="deleteItem(item)">x</span>
+      <h2 class="todo-page__list-item-title" [ngClass]="{'showAllTitle': item.showTitle}"
+        (click)="showTitle(item, $event)">{{item.title}}</h2>
+      <p class="todo-page__list-item-description" [ngClass]="{'showAllText': item.show}"
+        (click)="showText(item, $event)">{{item.description}}</p>
+      <div class="todo-page__list-item-footer">
+        <div class="todo-page__list-item-footer-spinner-wrapper">
+          <spinner [hidden]="!imageLoader"></spinner>
         </div>
-        <img class="todo-list__item-image"
-             src="{{item.img}}"
-             [hidden]="imageLoader"
-             (load)="this.imageLoader = false;"
-             (error)="setDefaultImage(item)">
-        <span class="todo-list__item-date">{{item.date}}</span>
-        <span class="todo-list__item-edit" (click)="editItem(item)">edit</span>
+        <img class="todo-page__list-item-image" [src]="item.img" [hidden]="imageLoader"
+          (load)="this.imageLoader = false;" (error)="setDefaultImage(item)">
+        <span class="todo-page__list-item-date">{{item.date}}</span>
+        <span class="todo-page__list-item-edit" (click)="editItem(item)">edit</span>
       </div>
     </li>
   </ul>
 </main>
-
 <app-map></app-map>

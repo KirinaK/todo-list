@@ -1,4 +1,4 @@
-.parent__form {
+.new-item__form {
   width: min-content;
   padding: 10px 30px;
   margin-top: 60px;
@@ -6,12 +6,12 @@
   float: left;
 }
 
-.form__item {
+.new-item__form-item {
   width: auto;
   text-transform: capitalize;
 }
 
-.form__item input {
+.new-item__form-item input {
   margin: 5px 0 10px;
   border: 1px solid #D6D6D6;
   border-radius: 7%;
@@ -19,11 +19,11 @@
   width: 200px;
 }
 
-.form__item input:active, :focus {
+.new-item__form-item input:active, :focus {
   outline-color: #007ffa;
 }
 
-.form__btn {
+.new-item__form-btn {
   width: auto;
   border-radius: 10%;
   font-family: 'Montserrat';
@@ -32,27 +32,27 @@
   background-color: #D6D6D6;
 }
 
-.form__btn:focus {
+.new-item__form-btn:focus {
   outline: none;
 }
 
-.btn_right {
+.new-item__form-btn_right {
   float: right;
 }
 
 @media (max-width: 533px) {
-  .parent__form {
+  .new-item__form {
     border-right: none;
   }
 
-  .parent {
+  .new-item {
     display: flex;
     justify-content: center;
   }
 }
 
 @media (min-width: 534px) and (max-width: 784px) {
-  .parent__form {
+  .new-item__form {
     margin-left: 0;
     position: fixed;
   }

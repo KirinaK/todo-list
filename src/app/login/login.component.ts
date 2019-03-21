@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginPageService } from '../services/login-page.service';
-import { LoggingService } from '../services/logging.service';
-import { AuthService } from '../services/auth.service';
+import { LoginPageService } from '../shared/services/login/login-page.service';
+import { LoggingService } from '../shared/services/logging/logging.service';
+import { AuthService } from '../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   public loginForm = new FormGroup({
@@ -19,9 +19,9 @@ export class LoginComponent implements OnInit {
     content: new FormControl(''),
     photo: new FormControl('')
   });
-  public isUserExist: boolean = true;
-  public createUser: boolean = true;
-  public isCorrect: boolean = true;
+  public isUserExist = true;
+  public createUser = true;
+  public isCorrect = true;
   private id: number;
   private users: any = [];
 
@@ -73,9 +73,9 @@ export class LoginComponent implements OnInit {
   }
 
   checkData(name, password) {
-    const user = this.users.filter(user => user.name === name);
-    this.isUserExist = (user.length === 1) ? true : false;
-    if (this.isUserExist) return this.checkPassword(user, password);
+    const userInfo = this.users.filter(user => user.name === name);
+    this.isUserExist = (userInfo.length === 1) ? true : false;
+    if (this.isUserExist) return this.checkPassword(userInfo, password);
     return this.isUserExist;
   }
 
