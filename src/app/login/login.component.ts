@@ -15,16 +15,12 @@ import { UserInfo } from '../shared/interfaces/user-info.interface';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public loginForm = new FormGroup({
-    id: new FormControl(null),
     name: new FormControl(''),
-    password: new FormControl(''),
-    date: new FormControl(''),
-    content: new FormControl(''),
-    photo: new FormControl('')
+    password: new FormControl('')
   });
   public isUserExist = true;
-  public createUser = true;
-  public isCorrect = true;
+  public isValid = true;
+  public isEmpty = false;
   private id: number;
   private users: any = [];
   private subscription: Subscription;
@@ -44,54 +40,40 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscription && this.subscription.unsubscribe();
   }
 
-  getUsers(): void {
+  public login(): void {
+    const name = this.loginForm.value.name;
+    const password = this.loginForm.value.password;
+    const userInfo = this.users.filter(user => user.name === name);
+    this.isEmpty = (this.loginForm.untouched || !this.loginForm.dirty) ? true : false;
+    if (this.checkData(userInfo) && this.checkPassword(userInfo, password) && !this.isEmpty) {
+      this.users.forEach(user => {
+        (user.name === name && user.password === password) ? this.id = user.id : null;
+      });
+      this.auth.sendToken(this.id.toString());
+      this.router.navigate(['home/' + this.id]);
+    }
+    if (!this.isEmpty && !this.isValid) this.loginForm.patchValue({password: ''});
+    if (!this.isUserExist) this.loginForm.reset();
+  }
+
+  public hideErrors() {
+    this.isUserExist = true;
+    this.isValid = true;
+    this.isEmpty = false;
+  }
+
+  private getUsers(): void {
     this.subscription = this.loginService.getAllUsers().subscribe(
       result => this.users = result,
       error => this.logger.errorLog(error)
     );
   }
 
-  login(): void {
-    const name = this.loginForm.value.name;
-    const password = this.loginForm.value.password;
-    if (this.checkData(name, password)) {
-      this.users.forEach(user => {
-        (user.name === name && user.password === password) ? this.id = user.id : null;
-      });
-      this.auth.sendToken(this.id.toString());
-      this.router.navigate(['/home/' + this.id]);
-    }
-    this.loginForm.reset();
+  private checkData(user: any): boolean {
+    if (!this.isEmpty) return this.isUserExist = (user.length === 1) ? true : false;
   }
 
-  signup(): void {
-    const name = this.loginForm.value.name;
-    const password = this.loginForm.value.password;
-    this.checkData(name, password);
-    this.createUser = !this.isUserExist ? true : false;
-    if (!this.isUserExist) {
-      this.users.filter(user => {
-        let lastId = (user.id === this.users.length) ? user.id : null;
-        this.loginForm.controls['id'].setValue(++lastId);
-        this.id = this.loginForm.controls['id'].value;
-      });
-      this.loginForm.controls['date'].setValue('');
-      this.loginForm.controls['content'].setValue('');
-      this.auth.sendToken(this.id.toString());
-      this.loginService.createUser(this.loginForm.value).subscribe();
-      this.router.navigate(['/home/' + this.loginForm.value.id]);
-    }
-    this.loginForm.reset();
-  }
-
-  checkData(name: string, password: string): boolean {
-    const userInfo = this.users.filter(user => user.name === name);
-    this.isUserExist = (userInfo.length === 1) ? true : false;
-    if (this.isUserExist) return this.checkPassword(userInfo, password);
-    return this.isUserExist;
-  }
-
-  checkPassword(user: UserInfo, pass: string): boolean {
-    return this.isCorrect = (user[0].password === pass) ? true : false;
+  private checkPassword(user: UserInfo, password: string): boolean {
+    if (!this.isEmpty) return this.isValid = (user[0].password === password) ? true : false;
   }
 }

@@ -23,6 +23,8 @@ import { LoggingService } from './shared/services/logging/logging.service';
 import { AuthGuard } from './shared/guards/auth.guard';
 
 import { apiKey } from './shared/constants/constants';
+import { SignUpComponent } from './login/sign-up/sign-up.component';
+import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { apiKey } from './shared/constants/constants';
     HeaderComponent,
     MapComponent,
     SpinnerComponent,
-    LoginComponent
+    LoginComponent,
+    SignUpComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

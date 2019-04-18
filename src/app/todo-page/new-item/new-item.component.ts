@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { ConnectionService } from '../../shared/services/connection/connection.service';
 import { environment } from '../../../environments/environment';
 import { LoggingService } from '../../shared/services/logging/logging.service';
-import { regexp } from '../../shared/constants/constants';
 import { Todo } from '../../shared/interfaces/todo';
 
 

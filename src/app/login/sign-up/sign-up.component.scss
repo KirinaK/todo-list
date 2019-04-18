@@ -1,38 +1,40 @@
-.login {
+.sign-up {
   width: 100vw;
   height: 100vh;
   position: absolute;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: linear-gradient(to bottom, #EAE5F0, #E5FDFF);
 }
 
-.login__form {
-  position: fixed;
+.sign-up__form {
   width: min-content;
   min-height: 244px;
   padding: 10px 30px;
   margin-top: -90px;
 }
 
-.login__form-title {
+.sign-up__form-title {
   width: auto;
   display: inline-block;
+}
+
+.sign-up__form-title::first-letter {
   text-transform: capitalize;
 }
 
-.login__form-title_center {
+.sign-up__form-title_center {
   text-align: center;
   display: block;
 }
 
-.login__form-title_thin {
+.sign-up__form-title_thin {
   font-weight: 400;
 }
 
-.login__form-input {
+.sign-up__form-input {
   margin: 5px 0 13px;
   border: 1px solid #D6D6D6;
   border-radius: 0.3em;
@@ -40,12 +42,38 @@
   width: 250px;
 }
 
-.login__form-input:active,
+.sign-up__form-input:active,
 :focus {
   outline-color: #007ffa;
 }
 
-.login__form-btn {
+.sign-up__form-about {
+  display: block;
+  margin: 5px 0 13px;
+  border: 1px solid #D6D6D6;
+  border-radius: 0.3em;
+  padding: 7px;
+  width: 250px;
+  min-height: 30px;
+  max-height: 120px;
+  resize: vertical;
+  wrap: soft;
+}
+
+.sign-up__form-tooltip {
+  display: none;
+}
+
+.sign-up__form-name:hover .sign-up__form-tooltip,
+.sign-up__form-password:hover .sign-up__form-tooltip {
+  display: inline-block;
+  font-size: 0.7em;
+  vertical-align: top;
+  text-transform: none;
+  color: #EF1515;
+}
+
+.sign-up__form-btn {
   width: 100%;
   border-radius: 0.3em;
   font-family: 'Montserrat';
@@ -54,37 +82,18 @@
   background-color: #8DD5F7;
 }
 
-.login__form-btn:focus {
-  outline: none;
-}
-
-.login__form-btn_right {
-  float: right;
-}
-
-.login__form-registration {
+.sign-up__form-link {
   font-size: 0.8em;
+  display: block;
   text-align: center;
   margin: 10px;
-}
-
-.login__form-link,
-.login__form-reset {
   text-decoration: none;
   color: #551a8b;
 }
 
-.login__form-reset {
-  display: block;
-  margin: 5px;
-}
-
-.login__errors {
-  margin-top: 110px;
-}
-
 .showError {
   visibility: visible;
+  margin-top: 0;
   color: #FE0606;
   font-size: 0.8em;
   text-align: center;

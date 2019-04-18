@@ -4,5 +4,5 @@ export interface UserInfo {
   password: string;
   date: string;
   photo: string;
-  content: string;
+  about: string;
 }

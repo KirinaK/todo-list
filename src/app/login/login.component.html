@@ -1,27 +1,32 @@
 <div class="login">
   <form class="login__form" [formGroup]="loginForm">
+    <h2 class="login__form-title login__form-title_center login__form-title_thin">Login</h2>
     <label class="login__form-name">
-      <span class="login__form-title">name</span>
-      <span class="login__form-tooltip">* Can't change after login!</span>
+      <span class="login__form-title">username</span>
       <input type="text" class="login__form-input" formControlName="name"
-        required>
+        required (focus)="hideErrors()">
     </label>
     <label class="login__form-password">
       <span class="login__form-title">password</span>
       <input type="password" class="login__form-input" formControlName="password"
-        required>
+        required (focus)="hideErrors()">
     </label>
-    <button type="submit" class="login__form-btn" (click)="login()" [disabled]="!loginForm.valid">Login</button>
-    <button type="submit" class="login__form-btn login__form-btn_right" (click)="signup()"
-      [disabled]="!loginForm.valid">Sign Up</button>
-    <p [ngClass]="isUserExist ? 'hideError' : 'showError'">
-      Can't find this user.
-    </p>
-    <p [ngClass]="(isCorrect || !createUser) ? 'hideError' : 'showError'">
-      Check data.
-    </p>
-    <p [ngClass]="createUser ? 'hideError' : 'showError'">
-      This user already exist.
-    </p>
+    <button type="button" class="login__form-btn" (click)="login()">Login</button>
+    <div class="login__form-registration">
+      <a class="login__form-reset" href="/reset">Forgot password?</a>
+      Don't have an account?
+      <a class="login__form-link" href="/register">Sign Up</a>
+    </div>
   </form>
+  <div class="login__errors">
+    <p [ngClass]="isUserExist ? 'hideError' : 'showError'">
+      User is not found
+    </p>
+    <p [ngClass]="isValid ? 'hideError' : 'showError'">
+      Invalid password
+    </p>
+    <p [ngClass]="isEmpty ? 'showError' : 'hideError'">
+      Username and password can't be blank
+    </p>
+  </div>
 </div>
