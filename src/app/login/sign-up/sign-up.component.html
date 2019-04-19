@@ -15,7 +15,7 @@
       <span class="sign-up__form-title">date of birth *</span>
       <input type="date" class="sign-up__form-input" id="date" formControlName="date"
         (focus)="hideErrors()" required>
-      <p [ngClass]="!isRight ? 'showError' : 'hideError'">
+      <p [ngClass]="!isRightDate ? 'showError' : 'hideError'">
         Date must be less than today date
       </p>
     </label>

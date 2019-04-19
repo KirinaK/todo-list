@@ -45,7 +45,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   showInfo(data: UserInfo): void {
     this.user = data;
-    if (!this.user.photo) this.setDefaultPhoto();
+    if (!this.user.photo) {
+      this.setDefaultPhoto();
+    }
   }
 
   showElements(): void {

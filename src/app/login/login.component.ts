@@ -15,8 +15,8 @@ import { UserInfo } from '../shared/interfaces/user-info.interface';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public loginForm = new FormGroup({
-    name: new FormControl(''),
-    password: new FormControl('')
+    name: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
   });
   public isUserExist = true;
   public isValid = true;
@@ -40,23 +40,21 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscription && this.subscription.unsubscribe();
   }
 
-  public login(): void {
-    const name = this.loginForm.value.name;
-    const password = this.loginForm.value.password;
+  login(): void {
+    const { name, password } = this.loginForm.value;
     const userInfo = this.users.filter(user => user.name === name);
-    this.isEmpty = (this.loginForm.untouched || !this.loginForm.dirty) ? true : false;
-    if (this.checkData(userInfo) && this.checkPassword(userInfo, password) && !this.isEmpty) {
+    this.isEmpty = (!this.loginForm.dirty) ? true : false;
+    if (this.checkData(userInfo) && this.checkPassword(userInfo, password)) {
       this.users.forEach(user => {
         (user.name === name && user.password === password) ? this.id = user.id : null;
       });
       this.auth.sendToken(this.id.toString());
       this.router.navigate(['home/' + this.id]);
     }
-    if (!this.isEmpty && !this.isValid) this.loginForm.patchValue({password: ''});
-    if (!this.isUserExist) this.loginForm.reset();
+    this.resetForm();
   }
 
-  public hideErrors() {
+  hideErrors(): void {
     this.isUserExist = true;
     this.isValid = true;
     this.isEmpty = false;
@@ -70,10 +68,21 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private checkData(user: any): boolean {
-    if (!this.isEmpty) return this.isUserExist = (user.length === 1) ? true : false;
+    return this.isUserExist = (user.length === 0 && !this.isEmpty) ? false : true;
   }
 
   private checkPassword(user: UserInfo, password: string): boolean {
-    if (!this.isEmpty) return this.isValid = (user[0].password === password) ? true : false;
+    if (!this.isEmpty) {
+      return this.isValid = (user[0].password === password) ? true : false;
+    }
+  }
+
+  private resetForm(): void {
+    if (!this.isEmpty && !this.isValid) {
+      this.loginForm.patchValue({password: ''});
+    }
+    if (!this.isUserExist) {
+      this.loginForm.reset();
+    }
   }
 }

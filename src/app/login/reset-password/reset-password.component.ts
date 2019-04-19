@@ -15,10 +15,10 @@ import { UserInfo } from '../../shared/interfaces/user-info.interface';
 })
 export class ResetPasswordComponent implements OnInit, OnDestroy {
   public resetForm = new FormGroup ({
-    name: new FormControl(''),
-    date: new FormControl(''),
-    password: new FormControl('', Validators.minLength(3)),
-    passwordRepeat: new FormControl('', Validators.minLength(3))
+    name: new FormControl('', Validators.required),
+    date: new FormControl('', Validators.required),
+    password: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    passwordRepeat: new FormControl('', [Validators.required, Validators.minLength(3)])
   });
   public isDateValid = true;
   public isUserExist = true;
@@ -44,15 +44,12 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     this.subscription && this.subscription.unsubscribe();
   }
 
-  public checkData(event: any): void {
-    const name = this.resetForm.value.name;
-    const date = this.resetForm.value.date;
+  checkData(event: any): void {
+    const { name, date } = this.resetForm.value;
     this.user = this.users.filter(user => user.name === name);
     this.isEmpty = (this.resetForm.untouched || !this.resetForm.dirty) ? true : false;
     this.isUserExist = (this.user.length === 0 && !this.isEmpty) ? false : true;
-    if (!this.isEmpty) this.isDateValid = (!this.isUserExist || (this.isUserExist && (this.user[0].date === date))) ? true : false;
-    if (!this.isUserExist) this.resetForm.reset();
-    if (!this.isDateValid) this.resetForm.patchValue({date: ''});
+    this.clearForm(date);
     if (this.isUserExist && this.isDateValid && !this.isEmpty) {
       const passwordsForm = document.getElementsByClassName('reset__form-password');
       event.target.className = 'hide';
@@ -60,7 +57,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     }
   }
 
-  public changePassword(data: UserInfo): void {
+  changePassword(data: UserInfo): void {
     this.subscription = this.loginService.updateUser(data).subscribe(
       result => {
         this.auth.sendToken(data.id.toString());
@@ -70,7 +67,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     );
   }
 
-  public hideErrors(): void {
+  hideErrors(): void {
     this.isDateValid = true;
     this.isUserExist = true;
     this.isEmpty = false;
@@ -96,5 +93,12 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
       this.changePassword(this.user[0]);
     }
     if (!this.isMatch || !this.isRepeat) this.resetForm.patchValue({password: '', passwordRepeat: ''});
+  }
+
+  private clearForm(date): void {
+    if (!this.isEmpty) {
+      this.isDateValid = (!this.isUserExist || (this.isUserExist && (this.user[0].date === date))) ? true : false;
+    }
+    (!this.isDateValid) ? this.resetForm.patchValue({date: ''}) : this.resetForm.reset();
   }
 }
