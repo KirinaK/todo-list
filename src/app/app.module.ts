@@ -22,7 +22,7 @@ import { LoggingService } from './shared/services/logging/logging.service';
 
 import { AuthGuard } from './shared/guards/auth.guard';
 
-import { ApiKey } from './shared/constants/api-key.constants';
+import { apiKey } from './shared/constants/constants';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { ApiKey } from './shared/constants/api-key.constants';
     ReactiveFormsModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: ApiKey
+      apiKey: apiKey
     })
   ],
   providers: [

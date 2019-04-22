@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TodoItemService } from '../shared/services/todo-item/todo-item.service';
-import { ConnectionService } from '../shared/services/connection/connection.service';
-import { LoggingService } from '../shared/services/logging/logging.service';
-import { DefaultImage } from '../shared/constants/default-image.constants';
-import { Todo } from '../shared/interfaces/todo';
-import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+import { ConnectionService } from '../shared/services/connection/connection.service';
+import { defaultImageSrc } from '../shared/constants/constants';
+import { LoggingService } from '../shared/services/logging/logging.service';
+import { TodoItemService } from '../shared/services/todo-item/todo-item.service';
+import { Todo } from '../shared/interfaces/todo';
 
 @Component({
   selector: 'app-todo-page',
@@ -19,14 +20,20 @@ export class TodoPageComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private userId: number;
 
-  constructor(private todoService: TodoItemService,
-              private connectionService: ConnectionService,
-              private logger: LoggingService,
-              private router: Router) { }
+  constructor(
+    private todoService: TodoItemService,
+    private logger: LoggingService,
+    private connectionService: ConnectionService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.userId = +this.router.url.match(/\d+/);
     this.showTodos();
+  }
+
+  ngOnDestroy() {
+    this.subscription && this.subscription.unsubscribe();
   }
 
   private showTodos(): void {
@@ -58,7 +65,7 @@ export class TodoPageComponent implements OnInit, OnDestroy {
     );
   }
 
-  public editItem(value) {
+  public editItem(value: Todo): void {
     this.connectionService.sendItem(value);
   }
 
@@ -85,10 +92,6 @@ export class TodoPageComponent implements OnInit, OnDestroy {
   }
 
   public setDefaultImage(item: Todo): void {
-    item.img = DefaultImage;
-  }
-
-  ngOnDestroy() {
-    this.subscription && this.subscription.unsubscribe();
+    item.img = defaultImageSrc;
   }
 }

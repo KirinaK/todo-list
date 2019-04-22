@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MapsAPILoader } from '@agm/core';
 
@@ -9,7 +9,7 @@ declare let google: any;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit {
+export class MapComponent {
   public place = {
     country: '',
     city: '',
@@ -25,15 +25,12 @@ export class MapComponent implements OnInit {
     this.getCurrentPosition();
   }
 
-  ngOnInit() {
-  }
-
   private getCurrentPosition(): void {
     if (navigator) {
       navigator.geolocation.getCurrentPosition(position => {
         this.lat = +position.coords.latitude;
         this.lng = +position.coords.longitude;
-        setTimeout(() => { this.getAddress(); }, 1000);
+        setTimeout(() => this.getAddress(), 1000);
       });
     }
   }

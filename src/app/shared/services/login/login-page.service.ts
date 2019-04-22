@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
 import { environment } from '../../../../environments/environment';
 import { UserInfo } from '../../interfaces/user-info.interface';
 
@@ -11,19 +13,19 @@ export class LoginPageService {
 
   constructor(private http: HttpClient) { }
 
-  getAllUsers() {
+  getAllUsers(): Observable<Object> {
     return this.http.get(this.apiURL + '/users');
   }
 
-  getUser(id: number) {
-    return this.http.get(this.apiURL + '/users/' + id);
+  getUser(id: number): Observable<any> {
+    return this.http.get<any>(this.apiURL + '/users/' + id);
   }
 
-  updateUser(user: UserInfo) {
+  updateUser(user: UserInfo): Observable<Object> {
     return this.http.put(this.apiURL + '/users/' + user.id, user);
   }
 
-  createUser(data) {
+  createUser(data: UserInfo): Observable<Object> {
     return this.http.post(this.apiURL + '/users', data);
   }
 }
