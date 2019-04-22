@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { LoginPageService } from '../../shared/services/login/login-page.service';
 import { LoggingService } from '../../shared/services/logging/logging.service';
+import { loginAsyncValidator } from '../user.validator';
 import { regDate } from '../../shared/constants/constants';
 
 @Component({
@@ -17,7 +18,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   public currentDate: string;
   public registrationForm = new FormGroup({
     id: new FormControl(null),
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(3)], loginAsyncValidator(this.loginService)),
     password: new FormControl('', [Validators.required, Validators.minLength(3)]),
     passwordRepeat: new FormControl('', [Validators.required, Validators.minLength(3)]),
     date: new FormControl('', Validators.required),
@@ -61,6 +62,10 @@ export class SignUpComponent implements OnInit, OnDestroy {
       this.router.navigate(['/home/' + this.registrationForm.value.id]);
     }
     this.formReset();
+  }
+
+  isLoginTaken(): boolean {
+    return this.registrationForm.get('name').hasError('loginExist');
   }
 
   hideErrors(): void {

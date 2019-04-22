@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 import { environment } from '../../../../environments/environment';
 import { UserInfo } from '../../interfaces/user-info.interface';
@@ -27,5 +28,9 @@ export class LoginPageService {
 
   createUser(data: UserInfo): Observable<Object> {
     return this.http.post(this.apiURL + '/users', data);
+  }
+
+  checkLogin(login: string): Observable<any[]> {
+    return this.http.get<any[]>(this.apiURL + '/users?name=' + login).pipe(delay(400));
   }
 }

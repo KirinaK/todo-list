@@ -6,6 +6,9 @@
       <input type="text" class="login__form-input" formControlName="name"
         required (focus)="hideErrors()">
     </label>
+    <p class="showError" *ngIf="!isLoginExist() && loginForm.value.name !== ''">
+      This user is not found.
+    </p>
     <label class="login__form-password">
       <span class="login__form-title">password</span>
       <input type="password" class="login__form-input" formControlName="password"
@@ -19,9 +22,6 @@
     </div>
   </form>
   <div class="login__errors">
-    <p [ngClass]="isUserExist ? 'hideError' : 'showError'">
-      User is not found
-    </p>
     <p [ngClass]="isValid ? 'hideError' : 'showError'">
       Invalid password
     </p>

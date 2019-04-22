@@ -7,8 +7,8 @@
       <span class="sign-up__form-tooltip">Can't change after login!</span>
       <input type="text" class="sign-up__form-input" formControlName="name"
         (focus)="hideErrors()" required>
-      <p [ngClass]="isUserExist ? 'showError' : 'hideError'">
-        This user already exist
+      <p class="showError" *ngIf="isLoginTaken()">
+        This name is already taken.
       </p>
     </label>
     <label class="sign-up__form-date">

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../shared/services/auth/auth.service';
 import { LoginPageService } from '../shared/services/login/login-page.service';
 import { LoggingService } from '../shared/services/logging/logging.service';
+import { loginAsyncValidator } from './user.validator';
 import { UserInfo } from '../shared/interfaces/user-info.interface';
 
 @Component({
@@ -15,7 +16,7 @@ import { UserInfo } from '../shared/interfaces/user-info.interface';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public loginForm = new FormGroup({
-    name: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required, loginAsyncValidator(this.loginService)),
     password: new FormControl('', Validators.required)
   });
   public isUserExist = true;
@@ -52,6 +53,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.router.navigate(['home/' + this.id]);
     }
     this.resetForm();
+  }
+
+  isLoginExist(): boolean {
+    return this.loginForm.dirty && this.loginForm.get('name').hasError('loginExist');
   }
 
   hideErrors(): void {

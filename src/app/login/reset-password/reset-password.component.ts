@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { LoginPageService } from '../../shared/services/login/login-page.service';
 import { LoggingService } from '../../shared/services/logging/logging.service';
+import { loginAsyncValidator } from '../user.validator';
 import { UserInfo } from '../../shared/interfaces/user-info.interface';
 
 @Component({
@@ -15,7 +16,7 @@ import { UserInfo } from '../../shared/interfaces/user-info.interface';
 })
 export class ResetPasswordComponent implements OnInit, OnDestroy {
   public resetForm = new FormGroup ({
-    name: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required, loginAsyncValidator(this.loginService)),
     date: new FormControl('', Validators.required),
     password: new FormControl('', [Validators.required, Validators.minLength(3)]),
     passwordRepeat: new FormControl('', [Validators.required, Validators.minLength(3)])
@@ -48,9 +49,8 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     const { name, date } = this.resetForm.value;
     this.user = this.users.filter(user => user.name === name);
     this.isEmpty = (this.resetForm.untouched || !this.resetForm.dirty) ? true : false;
-    this.isUserExist = (this.user.length === 0 && !this.isEmpty) ? false : true;
     this.clearForm(date);
-    if (this.isUserExist && this.isDateValid && !this.isEmpty) {
+    if (this.isDateValid && !this.isEmpty) {
       const passwordsForm = document.getElementsByClassName('reset__form-password');
       event.target.className = 'hide';
       passwordsForm[0].className = 'showForm';
@@ -67,9 +67,12 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     );
   }
 
+  isLoginExist(): boolean {
+    return this.resetForm.dirty && this.resetForm.get('name').hasError('loginExist');
+  }
+
   hideErrors(): void {
     this.isDateValid = true;
-    this.isUserExist = true;
     this.isEmpty = false;
     this.isRepeat = false;
     this.isMatch = true;
@@ -97,8 +100,10 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
   private clearForm(date): void {
     if (!this.isEmpty) {
-      this.isDateValid = (!this.isUserExist || (this.isUserExist && (this.user[0].date === date))) ? true : false;
+      this.isDateValid = (this.isLoginExist() && (this.user[0].date === date)) ? true : false;
+      if (!this.isDateValid) {
+        this.resetForm.patchValue({date: ''});
+      }
     }
-    (!this.isDateValid) ? this.resetForm.patchValue({date: ''}) : this.resetForm.reset();
   }
 }
