@@ -15,10 +15,7 @@ import { UserInfo } from '../shared/interfaces/user-info.interface';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  public loginForm = new FormGroup({
-    name: new FormControl('', Validators.required, loginAsyncValidator(this.loginService)),
-    password: new FormControl('', Validators.required)
-  });
+  public loginForm: FormGroup;
   public isUserExist = true;
   public isValid = true;
   public isEmpty = false;
@@ -34,6 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.initForm();
     this.getUsers();
   }
 
@@ -52,11 +50,19 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.auth.sendToken(this.id.toString());
       this.router.navigate(['home/' + this.id]);
     }
+    this.resetPassword();
     this.resetForm();
   }
 
   isLoginExist(): boolean {
     return this.loginForm.dirty && this.loginForm.get('name').hasError('loginExist');
+  }
+
+  initForm(): void {
+    this.loginForm = new FormGroup({
+      name: new FormControl('', Validators.required, loginAsyncValidator(this.loginService)),
+      password: new FormControl('', Validators.required)
+    });
   }
 
   hideErrors(): void {
@@ -83,11 +89,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private resetForm(): void {
-    if (!this.isEmpty && !this.isValid) {
-      this.loginForm.patchValue({password: ''});
-    }
     if (!this.isUserExist) {
       this.loginForm.reset();
+    }
+  }
+
+  private resetPassword(): void {
+    if (!this.isEmpty && !this.isValid) {
+      this.loginForm.patchValue({password: ''});
     }
   }
 }

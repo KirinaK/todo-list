@@ -16,15 +16,7 @@ import { regDate } from '../../shared/constants/constants';
 })
 export class SignUpComponent implements OnInit, OnDestroy {
   public currentDate: string;
-  public registrationForm = new FormGroup({
-    id: new FormControl(null),
-    name: new FormControl('', [Validators.required, Validators.minLength(3)], loginAsyncValidator(this.loginService)),
-    password: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    passwordRepeat: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    date: new FormControl('', Validators.required),
-    about: new FormControl(''),
-    photo: new FormControl('')
-  });
+  public registrationForm: FormGroup;
   public isMatch = true;
   public isRightDate = true;
   public isUserExist = false;
@@ -41,6 +33,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getCurrentDate();
+    this.initForm();
     this.getUsers();
   }
 
@@ -61,11 +54,25 @@ export class SignUpComponent implements OnInit, OnDestroy {
       this.loginService.createUser(this.registrationForm.value).subscribe();
       this.router.navigate(['/home/' + this.registrationForm.value.id]);
     }
-    this.formReset();
+    this.resetPasswords();
+    this.resetDateAndPasswords();
+    this.resetForm();
   }
 
   isLoginTaken(): boolean {
     return this.registrationForm.get('name').hasError('loginExist');
+  }
+
+  initForm(): void {
+    this.registrationForm = new FormGroup({
+      id: new FormControl(null),
+      name: new FormControl('', [Validators.required, Validators.minLength(3)], loginAsyncValidator(this.loginService)),
+      password: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      passwordRepeat: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      date: new FormControl('', Validators.required),
+      about: new FormControl(''),
+      photo: new FormControl('')
+    });
   }
 
   hideErrors(): void {
@@ -118,14 +125,19 @@ export class SignUpComponent implements OnInit, OnDestroy {
     }
   }
 
-  private formReset(): void {
+  private resetForm(): void {
+    this.registrationForm.reset();
+  }
+
+  private resetPasswords(): void {
     if (!this.isUserExist && !this.isMatch) {
       this.registrationForm.patchValue({password: '', passwordRepeat: ''});
     }
+  }
+
+  private resetDateAndPasswords(): void {
     if (!this.isRightDate) {
       this.registrationForm.patchValue({date: '', password: '', passwordRepeat: ''});
-    } else {
-      this.registrationForm.reset();
     }
   }
 }
