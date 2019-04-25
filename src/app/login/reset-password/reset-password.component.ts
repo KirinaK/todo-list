@@ -114,7 +114,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
   private resetPasswords(): void {
     if (!this.isMatch || !this.isRepeat) {
-      this.resetForm.patchValue({password: '', passwordRepeat: ''})
+      this.resetForm.patchValue({password: '', passwordRepeat: ''});
     }
   }
 }

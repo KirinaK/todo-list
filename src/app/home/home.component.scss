@@ -39,6 +39,22 @@
   display: none;
 }
 
+.home__change-link::-webkit-input-placeholder {
+  text-align: center;
+}
+
+.home__change-link::-moz-placeholder {
+  text-align: center;
+}
+
+.home__change-link:-ms-input-placeholder {
+  text-align: center;
+}
+
+.home__change-link::-ms-input-placeholder {
+  text-align: center;
+}
+
 .home__change-link::placeholder {
   text-align: center;
 }

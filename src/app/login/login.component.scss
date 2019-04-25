@@ -2,15 +2,21 @@
   width: 100vw;
   height: 100vh;
   position: absolute;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -ms-flex-pack: center;
   justify-content: center;
+  -ms-flex-align: center;
   align-items: center;
   background: linear-gradient(to bottom, #EAE5F0, #E5FDFF);
 }
 
 .login__form {
   position: fixed;
+  width: -webkit-min-content;
+  width: -moz-min-content;
   width: min-content;
   min-height: 244px;
   padding: 10px 30px;

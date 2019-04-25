@@ -2,10 +2,15 @@
   padding-top: 60px;
   margin-top: 0;
   list-style-type: none;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-direction: row;
   flex-direction: row;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  -ms-flex-pack: start;
   justify-content: flex-start;
+  -ms-flex-line-pack: start;
   align-content: flex-start;
   position: fixed;
   left: 265px;
@@ -34,6 +39,8 @@
 }
 
 .todo-page__list-item:hover {
+  -webkit-transform: scale(1.02);
+  -ms-transform: scale(1.02);
   transform: scale(1.02);
   background: linear-gradient(to bottom, #EAE5F0, #E5FDFF);
 }
@@ -56,6 +63,8 @@
 
 .todo-page__list-item-delete:hover,
 .todo-page__list-item-edit:hover {
+  -webkit-transform: scale(1.25);
+  -ms-transform: scale(1.25);
   transform: scale(1.25);
 }
 
@@ -73,11 +82,12 @@
   white-space: inherit;
   word-wrap: break-word;
   overflow-y: auto;
-  -webkit-transition: height .25s;
   transition: height .25s;
 }
 
 .showAllTitle {
+  height: -webkit-min-content;
+  height: -moz-min-content;
   height: min-content;
   white-space: inherit;
   word-wrap: break-word;
@@ -116,6 +126,8 @@
   .todo-page__start-message {
     font-size: 0.92em;
     top: 60%;
+    -webkit-transform: translate(-40%, 0);
+    -ms-transform: translate(-40%, 0);
     transform: translate(-40%, 0);
   }
 }
@@ -134,17 +146,24 @@
 
 @media (max-width: 784px) {
   .todo-page__list {
+    -ms-flex-direction: column;
     flex-direction: column;
+    -ms-flex-wrap: inherit;
     flex-wrap: inherit;
+    -ms-flex-align: center;
     align-items: center;
+    -ms-flex-pack: center;
     justify-content: center;
     position: relative;
+    min-height: -webkit-fit-content;
+    min-height: -moz-fit-content;
     min-height: fit-content;
   }
 }
 
 @media (min-width: 785px) and (max-width: 1024px) {
   .todo-page__list {
+    -ms-flex-pack: start;
     justify-content: flex-start;
     padding-left: 15px;
   }
