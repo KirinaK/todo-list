@@ -19,7 +19,8 @@
   width: 200px;
 }
 
-.new-item__form-item input:active, :focus {
+.new-item__form-item input:active,
+.new-item__form-item input:focus {
   outline-color: #007ffa;
 }
 

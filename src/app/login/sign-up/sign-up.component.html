@@ -1,0 +1,49 @@
+<div class="sign-up">
+  <form class="sign-up__form" [formGroup]="registrationForm">
+    <h2 class="sign-up__form-title sign-up__form-title_center sign-up__form-title_thin">Sign
+      Up</h2>
+    <label class="sign-up__form-name">
+      <span class="sign-up__form-title">username *</span>
+      <span class="sign-up__form-tooltip">Can't change after login!</span>
+      <input type="text" class="sign-up__form-input" formControlName="name"
+        (focus)="hideErrors()" required>
+      <p class="showError" *ngIf="isLoginTaken()">
+        This name is already taken.
+      </p>
+    </label>
+    <label class="sign-up__form-date">
+      <span class="sign-up__form-title">date of birth *</span>
+      <input type="date" class="sign-up__form-input" id="date" formControlName="date"
+        (focus)="hideErrors()" required>
+      <p [ngClass]="!isRightDate ? 'showError' : 'hideError'">
+        Date must be less than today date
+      </p>
+    </label>
+    <label class="sign-up__form-photo">
+      <span class="sign-up__form-title">insert link of photo</span>
+      <input type="text" class="sign-up__form-input" formControlName="photo"
+        placeholder="http(s)://...">
+    </label>
+    <label class="sign-up__form-content">
+      <span class="sign-up__form-title">about</span>
+      <textarea class="sign-up__form-about" formControlName="about" (keydown)="autosize($event)"></textarea>
+    </label>
+    <label class="sign-up__form-password">
+      <span class="sign-up__form-title">password *</span>
+      <span class="sign-up__form-tooltip">Must content at least 3 symbols</span>
+      <input type="password" class="sign-up__form-input" formControlName="password"
+        (focus)="hideErrors()" required>
+    </label>
+    <label class="sign-up__form-password">
+      <span class="sign-up__form-title">repeat password *</span>
+      <input type="password" class="sign-up__form-input" formControlName="passwordRepeat"
+        (focus)="hideErrors()" required>
+    </label>
+    <p [ngClass]="!isMatch ? 'showError' : 'hideError'">
+      Passwords doesn't match
+    </p>
+    <button type="button" class="sign-up__form-btn" (click)="signUp()"
+      [disabled]="!registrationForm.valid">Registration</button>
+    <a class="sign-up__form-link" href="/login">Return to login &#10140;</a>
+  </form>
+</div>
